@@ -1,4 +1,4 @@
-export function* fibonacciGenerator() {
+export function* fibGenerator() {
     let fib1 = 0;
     let fib2 = 1;
 

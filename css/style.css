@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #85d8e5;
     height: 100vh;
@@ -40,19 +44,40 @@ main {
     justify-content: center;
 }
 
+.panel-step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step {
+    font-family: 'McLaren', cursive;
+    color: #73b0be;
+    outline: 2px dashed #91dbe7;
+    outline-offset: -7px;
+    background-color: #fff;
+    padding: 1rem 1rem;
+    border-radius: 1.4rem;
+    transform: rotate(2deg);
+}
+
+.step-num {
+    font-size: 22px;
+}
+
 .panel-numbers {
     display: grid;
-    grid-template-columns: 1fr 2rem 1fr;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr 8rem 1fr;
+    grid-template-rows: 1fr 94px;
     grid-template-areas:
         'num1 sign num2'
-        'sum  sum  sum';
+        'arrow-left sum arrow-right';
     gap: 3rem 0;
 
     justify-items: center;
     align-items: center;
 
-    margin: 4rem 0 2.5rem 0;
+    margin: 1rem 0 2.5rem 0;
 }
 
 .fib-num {
@@ -61,6 +86,83 @@ main {
     background-color: #ffd576;
     padding: 0.5rem 1rem;
     border: 7px dotted;
+}
+
+.fib-num-1 {
+    justify-self: end;
+}
+
+.fib-num-2-slide-left {
+    animation: 0.5s ease fibNum2SlideLeft;
+}
+
+.fib-num-3-slide-top-right {
+    animation: 0.5s ease fibNum3SlideToRight;
+}
+
+.fib-hide {
+    animation: 0.5s ease fibHide forwards;
+}
+
+.arrow-left {
+    grid-area: arrow-left;
+    justify-self: end;
+}
+
+.fib-num-3 {
+    position: relative;
+}
+
+.arrow-left-img,
+.arrow-right-img {
+    width: 75px;
+    position: absolute;
+    top: calc(-50% - 6px);
+}
+
+.arrow-left-img {
+    right: calc(100% + 10px);
+}
+
+.arrow-right-img {
+    transform: scaleX(-1);
+    left: calc(100% + 10px);
+}
+
+@keyframes fibNum2SlideLeft {
+    from {
+    }
+    to {
+        transform: translateX(calc(-128px - 100%));
+    }
+}
+
+@keyframes fibNum3SlideToRight {
+    from {
+    }
+    to {
+        transform: translate(calc(64px + 50%), calc(-3rem - 100%));
+        font-size: 2.5rem;
+    }
+}
+
+@keyframes fibHide {
+    from {
+    }
+    20% {
+        opacity: 0;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fib-hidden {
+    opacity: 0;
+}
+
+.fib-num-2 {
+    justify-self: start;
 }
 
 .fib-num-3 {
