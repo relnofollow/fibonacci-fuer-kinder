@@ -1,19 +1,15 @@
-export class FibonacciGenerator {
-    #fib1 = 0;
-    #fib2 = 1;
+export function* fibonacciGenerator() {
+    let fib1 = 0;
+    let fib2 = 1;
 
-    constructor() {}
+    yield 0;
+    yield 1;
 
-    *[Symbol.iterator]() {
-        yield this.#fib1;
-        yield this.#fib2;
+    while (true) {
+        const next = fib1 + fib2;
+        fib1 = fib2;
+        fib2 = next;
 
-        while (true) {
-            const next = this.#fib1 + this.#fib2;
-            this.#fib1 = this.#fib2;
-            this.#fib2 = next;
-
-            yield next;
-        }
+        yield next;
     }
 }

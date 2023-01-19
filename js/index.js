@@ -1,4 +1,4 @@
-import { FibonacciGenerator } from './FibonacciGenerator.js';
+import { fibonacciGenerator } from './FibonacciGenerator.js';
 
 class FibCanvas {
     #fibDomElements = [];
@@ -25,19 +25,21 @@ class FibCanvas {
 
     #initDomElements() {
         for (let i = 1; i <= 3; i++) {
-            this.#fibDomElements.push(document.querySelector(`.fib-${i}`));
+            this.#fibDomElements.push(document.querySelector(`.fib-num-${i}`));
         }
     }
 
     #initNumbers() {
-        this.#fibGenerator = new FibonacciGenerator();
+        this.#fibGenerator = fibonacciGenerator();
         this.#fibNumbers = [];
-        this.#fibNumbers.push(...[0, 1, this.#fibGenerator.next()]); // TODO: get all of these numbers from the generator
+        for (let i = 1; i <= 3; i++) {
+            this.#fibNumbers.push(this.#fibGenerator.next().value);
+        }
     }
 
     #generateNextNumber() {
         this.#fibNumbers.shift();
-        this.#fibNumbers.push(this.#fibGenerator.next());
+        this.#fibNumbers.push(this.#fibGenerator.next().value);
     }
 
     #renderNumbers() {
