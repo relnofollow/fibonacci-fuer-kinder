@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+}
+
+main {
+    min-width: 300px;
+    width: 90vw;
+    margin: 0 auto;
+    background-color: bisque;
+}
