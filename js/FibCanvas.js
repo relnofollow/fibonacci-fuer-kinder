@@ -4,47 +4,49 @@ import { FibCanvasAnimation } from './FibCanvasAnimation.js';
 export class FibCanvas {
     #fibNumDomElements = [];
     #fibStepNumDomElement = [];
-    #arrowDomElements = [];
+    #explanatoryDomElements = [];
 
     #fibGenerator;
-    #stepNum;
+    #stepNumber;
     #fibNumbers = [];
     #numberFormatter = new Intl.NumberFormat('de-DE', {});
 
     constructor() {
         this.#initDomElements();
         this.#initNumbers();
-        this.#renderNumbers();
+        this.#renderFibNumbers();
     }
 
     async nextNumber() {
         const fibCanvasAnimation = new FibCanvasAnimation(
             this.#fibNumDomElements,
-            this.#arrowDomElements
+            this.#explanatoryDomElements
         );
+
+        this.#updateStepNumber();
 
         await fibCanvasAnimation.animateBeforeCalculation();
 
-        this.#generateNextNumber();
-        this.#renderNumbers();
+        this.#updateFibNumbers();
 
         // await fibCanvasAnimation.animateAfterCalculation();
     }
 
     resetToStart() {
         this.#resetNumbers();
-        this.#renderNumbers();
+        this.#renderFibNumbers();
     }
 
     #initDomElements() {
         this.#fibNumDomElements = document.querySelectorAll('.fib-num');
-
-        this.#arrowDomElements = document.querySelectorAll('.arrow');
+        this.#explanatoryDomElements = document.querySelectorAll(
+            '.fib-arrow, .fib-sign'
+        );
         this.#fibStepNumDomElement = document.querySelector('.step-num');
     }
 
     #initNumbers() {
-        this.#stepNum = 1;
+        this.#stepNumber = 1;
         this.#fibGenerator = fibGenerator();
         this.#fibNumbers = [];
         for (let i = 1; i <= 3; i++) {
@@ -56,18 +58,25 @@ export class FibCanvas {
         this.#initNumbers();
     }
 
-    #generateNextNumber() {
-        this.#stepNum++;
+    #updateStepNumber() {
+        this.#stepNumber++;
+        this.#renderStepNumber();
+    }
+
+    #updateFibNumbers() {
+        this.#generateNextFibNumber();
+        this.#renderFibNumbers();
+    }
+
+    #generateNextFibNumber() {
         this.#fibNumbers.shift();
         this.#fibNumbers.push(this.#fibGenerator.next().value);
     }
 
-    #renderNumbers() {
+    #renderFibNumbers() {
         this.#fibNumbers.forEach((number, index) =>
             this.#renderFibNumber(index)
         );
-
-        this.#renderStepNumber();
     }
 
     #renderFibNumber(index) {
@@ -78,7 +87,7 @@ export class FibCanvas {
 
     #renderStepNumber() {
         this.#fibStepNumDomElement.innerHTML = `${this.#formatNumber(
-            this.#stepNum
+            this.#stepNumber
         )}.`;
     }
 

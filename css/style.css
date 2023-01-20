@@ -8,6 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 main {
@@ -73,7 +74,7 @@ h3 {
 
 .panel-numbers {
     display: grid;
-    grid-template-columns: 1fr 8rem 1fr;
+    grid-template-columns: minmax(0, 1fr) 8rem minmax(0, 1fr);
     grid-template-rows: 1fr 94px;
     grid-template-areas:
         'num1 sign num2'
@@ -84,6 +85,12 @@ h3 {
     align-items: center;
 
     margin: 1rem 0 2.5rem 0;
+}
+
+.fib-canvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .fib-num {
@@ -98,39 +105,45 @@ h3 {
     justify-self: end;
 }
 
+.fib-num-2 {
+    justify-self: start;
+}
+
+.fib-num-3 {
+    grid-area: sum;
+    font-size: 3.5rem;
+    position: relative;
+}
+
 .fib-num-2-slide-left {
-    animation: 0.5s ease fibNum2SlideLeft;
+    animation: 0.5s ease fibNum2SlideLeft forwards;
 }
 
 .fib-num-3-slide-top-right {
-    animation: 0.5s ease fibNum3SlideToRight;
+    transform-origin: center left;
+    offset-path: path(var(--fib-num-3-offset-path));
+    offset-rotate: 0deg;
+
+    animation-name: fibNum3SlideToRight;
+    animation-duration: 0.5s;
 }
 
 .fib-hide {
     animation: 0.5s ease fibHide forwards;
 }
 
-.arrow-left {
-    grid-area: arrow-left;
-    justify-self: end;
-}
-
-.fib-num-3 {
-    position: relative;
-}
-
-.arrow-left-img,
-.arrow-right-img {
+.fib-arrow-left-img,
+.fib-arrow-right-img {
     width: 75px;
     position: absolute;
-    top: calc(-50% - 6px);
+    bottom: 30px;
 }
 
-.arrow-left-img {
+.fib-arrow-left-img {
     right: calc(100% + 10px);
 }
 
-.arrow-right-img {
+.fib-arrow-right-img {
     transform: scaleX(-1);
     left: calc(100% + 10px);
 }
@@ -145,10 +158,11 @@ h3 {
 
 @keyframes fibNum3SlideToRight {
     from {
+        offset-distance: 0%;
     }
     to {
-        transform: translate(calc(64px + 50%), calc(-3rem - 100%));
-        font-size: 2.5rem;
+        offset-distance: 100%;
+        /* font-size: 2.5rem; */
     }
 }
 
@@ -165,15 +179,6 @@ h3 {
 
 .fib-hidden {
     opacity: 0;
-}
-
-.fib-num-2 {
-    justify-self: start;
-}
-
-.fib-num-3 {
-    grid-area: sum;
-    font-size: 3.5rem;
 }
 
 .fib-sign {

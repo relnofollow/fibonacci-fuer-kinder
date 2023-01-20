@@ -1,58 +1,60 @@
 export class FibCanvasAnimation {
     #fibNumDomElements;
-    #arrowDomElements;
+    #explanatoryDomElements;
 
-    constructor(fibNumDomElements, arrowDomElements) {
+    constructor(fibNumDomElements, explanatoryDomElements) {
         this.#fibNumDomElements = fibNumDomElements;
-        this.#arrowDomElements = arrowDomElements;
+        this.#explanatoryDomElements = explanatoryDomElements;
     }
 
-    animateBeforeCalculation() {
-        this.#toggleArrows();
+    async animateBeforeCalculation() {
+        await this.#toggleDomElements();
+        await this.#animateFibNum2SlideLeft();
+        await this.#animateFibNum3SlideTopRight();
 
-        const animation = Promise.all([
-            this.#animateFibNum1Hide(),
-            this.#animateFibNum2SlideLeft(),
-            this.#animateFibNum3SlideTopRight(),
-        ]).then(() => this.#toggleArrows());
+        this.#fibNumDomElements[2].classList.remove(
+            'fib-num-3-slide-top-right'
+        );
+        this.#fibNumDomElements[1].classList.remove('fib-num-2-slide-left');
+        this.#toggleDomElements();
 
-        return animation;
+        return Promise.resolve();
     }
 
-    #toggleArrows() {
-        this.#arrowDomElements.forEach((el) => el.classList.toggle('fib-hide'));
+    #toggleDomElements() {
+        return this.#toggleDomElement([
+            ...this.#explanatoryDomElements,
+            this.#fibNumDomElements[0],
+        ]);
     }
 
-    #animateFibNum1Hide() {
-        const fibNum1DomElement = this.#fibNumDomElements[0];
+    #toggleDomElement(elementOrArray) {
+        return Promise.all(
+            (Array.isArray(elementOrArray)
+                ? elementOrArray
+                : [elementOrArray]
+            ).map((el) => this.#animateHide(el))
+        );
+    }
 
+    #animateHide(domElement) {
         const animation = new Promise((resolve, reject) => {
-            fibNum1DomElement.addEventListener(
-                'animationend',
-                () => {
-                    fibNum1DomElement.classList.remove('fib-hide');
-                    resolve();
-                },
-                { once: true }
-            );
+            domElement.addEventListener('animationend', resolve, {
+                once: true,
+            });
         });
 
-        fibNum1DomElement.classList.add('fib-hide');
+        domElement.classList.toggle('fib-hide');
 
         return animation;
     }
 
     #animateFibNum2SlideLeft() {
         const fibNum2DomElement = this.#fibNumDomElements[1];
-        const animation = new Promise((resolve, reject) => {
-            fibNum2DomElement.addEventListener(
-                'animationend',
-                () => {
-                    fibNum2DomElement.classList.remove('fib-num-2-slide-left');
-                    resolve();
-                },
-                { once: true }
-            );
+        const animation = new Promise((resolve) => {
+            fibNum2DomElement.addEventListener('animationend', resolve, {
+                once: true,
+            });
         });
 
         fibNum2DomElement.classList.add('fib-num-2-slide-left');
@@ -63,24 +65,33 @@ export class FibCanvasAnimation {
     #animateFibNum3SlideTopRight() {
         const fibNum3DomElement = this.#fibNumDomElements[2];
 
-        const animation = new Promise((resolve, reject) => {
-            fibNum3DomElement.addEventListener(
-                'animationend',
-                () => {
-                    fibNum3DomElement.classList.remove(
-                        'fib-num-3-slide-top-right'
-                    );
-                    // fibNum3DomElement.classList.add('fib-hidden');
-                    resolve();
-                },
-                { once: true }
-            );
+        const animation = new Promise((resolve) => {
+            fibNum3DomElement.addEventListener('animationend', resolve, {
+                once: true,
+            });
         });
 
+        document.documentElement.style.setProperty(
+            '--fib-num-3-offset-path',
+            this.#getFibNum3OffsetPath(fibNum3DomElement)
+        );
         fibNum3DomElement.classList.add('fib-num-3-slide-top-right');
 
         return animation;
     }
 
     animateAfterCalculation() {}
+
+    #getFibNum3OffsetPath(fibNum3DomElement) {
+        const width = fibNum3DomElement.offsetWidth;
+        const height = fibNum3DomElement.offsetHeight;
+
+        const moveX = width * 0.5;
+        const moveY = height * 0.5;
+
+        const dY = -48 - height;
+
+        // '"M33,46 c59,0 100,-59 100,-141"'
+        return `"M${moveX},${moveY} c37,0 64,${dY * 0.42} 64,${dY}"`;
+    }
 }
