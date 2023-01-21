@@ -4,7 +4,9 @@ import { FibCanvasAnimation } from './FibCanvasAnimation.js';
 export class FibCanvas {
     #fibNumDomElements = [];
     #fibStepNumDomElement = [];
-    #explanatoryDomElements = [];
+    #plusSignDomElement;
+    #arrow1DomElement;
+    #arrow2DomElement;
 
     #fibGenerator;
     #stepNumber;
@@ -20,7 +22,9 @@ export class FibCanvas {
     async nextNumber() {
         const fibCanvasAnimation = new FibCanvasAnimation(
             this.#fibNumDomElements,
-            this.#explanatoryDomElements
+            this.#plusSignDomElement,
+            this.#arrow1DomElement,
+            this.#arrow2DomElement
         );
 
         this.#updateStepNumber();
@@ -29,7 +33,7 @@ export class FibCanvas {
 
         this.#updateFibNumbers();
 
-        // await fibCanvasAnimation.animateAfterCalculation();
+        await fibCanvasAnimation.animateAfterCalculation();
     }
 
     resetToStart() {
@@ -39,9 +43,9 @@ export class FibCanvas {
 
     #initDomElements() {
         this.#fibNumDomElements = document.querySelectorAll('.fib-num');
-        this.#explanatoryDomElements = document.querySelectorAll(
-            '.fib-arrow, .fib-sign'
-        );
+        this.#plusSignDomElement = document.querySelector('.fib-sign');
+        this.#arrow1DomElement = document.querySelector('.fib-arrow-left');
+        this.#arrow2DomElement = document.querySelector('.fib-arrow-right');
         this.#fibStepNumDomElement = document.querySelector('.step-num');
     }
 
