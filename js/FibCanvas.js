@@ -45,7 +45,8 @@ export class FibCanvas {
     }
 
     resetToStart() {
-        this.#resetNumbers();
+        this.#initNumbers();
+        this.#renderStepNumber();
         this.#renderFibNumbers();
     }
 
@@ -69,10 +70,6 @@ export class FibCanvas {
         this.#stepNumber = 1;
         this.#fibGenerator = new FibGenerator();
         this.#fibNumbers = this.#fibGenerator.next();
-    }
-
-    #resetNumbers() {
-        this.#initNumbers();
     }
 
     #setNextStepNumber() {
