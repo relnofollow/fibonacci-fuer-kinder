@@ -1,0 +1,61 @@
+button {
+    border: 0 none;
+    cursor: pointer;
+    display: block;
+    width: 140px;
+    height: 52px;
+    font-family: 'McLaren', cursive;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.btn-dashed {
+    background-color: #4e87a0;
+    outline: 2px dashed #397691;
+    outline-offset: -7px;
+    padding: 1rem 1rem;
+    border-radius: 1.4rem;
+}
+
+.btn-red {
+    background: url(../images/bg_red-btn.png) no-repeat;
+}
+
+.btn-radio {
+    width: 73px;
+    height: 59px;
+    font-size: 24px;
+    outline: 2px dashed #6a9d27;
+    background-color: #74af27;
+}
+
+.btn-radio:not(:first-child):not(:last-child) {
+    border-radius: 0.3rem;
+}
+
+.btn-radio:first-child {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    rotate: 2deg;
+}
+
+.btn-radio:nth-child(3) {
+    rotate: -3deg;
+}
+
+.btn-radio:last-child {
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
+}
+
+.btn-stop {
+    width: 94px;
+    height: 59px;
+    outline: 2px dashed #e95558;
+    background-color: #ff6b6f;
+}

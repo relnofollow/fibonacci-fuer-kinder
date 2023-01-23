@@ -42,15 +42,54 @@
                 </div>
 
                 <div class="panel-actions">
-                    <button type="button" class="btn btn-red fib-reset">
-                        Zum Anfang
-                    </button>
-                    <button type="button" class="btn btn-red fib-prev">
-                        Zurück
-                    </button>
-                    <button type="button" class="btn btn-red fib-next">
-                        Weiter
-                    </button>
+                    <div class="panel-stop fib-display-none">
+                        <button type="button" class="btn-dashed btn-stop">
+                            Stop
+                        </button>
+                    </div>
+                    <div class="panel-step-btns">
+                        <button type="button" class="btn-dashed fib-reset">
+                            Zum Anfang
+                        </button>
+                        <button type="button" class="btn btn-red fib-prev">
+                            Zurück
+                        </button>
+                        <button type="button" class="btn btn-red fib-next">
+                            Weiter
+                        </button>
+                    </div>
+                    <div class="panel-radio-btns">
+                        <div class="radio-btns">
+                            <button
+                                type="button"
+                                class="btn-dashed btn-radio btn-back-extra"
+                                title="Zurück am schnellsten!"
+                            >
+                                «
+                            </button>
+                            <button
+                                type="button"
+                                class="btn-dashed btn-radio btn-back"
+                                title="Zurück schneller!"
+                            >
+                                ‹
+                            </button>
+                            <button
+                                type="button"
+                                class="btn-dashed btn-radio btn-ff"
+                                title="Weiter schneller!"
+                            >
+                                ›
+                            </button>
+                            <button
+                                type="button"
+                                class="btn-dashed btn-radio btn-ff-extra"
+                                title="Weiter am schnellsten!"
+                            >
+                                »
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

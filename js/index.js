@@ -17,10 +17,18 @@ import { FibCanvas } from './FibCanvas.js';
 })();
 
 function blockActionPanelWhileInProgress(promise) {
-    const actionsPanelDomElement = document.querySelector('.panel-actions');
-    actionsPanelDomElement.style.opacity = 0;
+    const btnStop = document.querySelector('.panel-stop');
+    const actionPanelDomElements = document.querySelectorAll(
+        '.panel-step-btns, .panel-radio-btns'
+    );
+
+    actionPanelDomElements.forEach((el) => el.classList.add('fib-hidden'));
+    btnStop.classList.remove('fib-display-none');
 
     promise.then(() => {
-        actionsPanelDomElement.style.opacity = 1;
+        actionPanelDomElements.forEach((el) =>
+            el.classList.remove('fib-hidden')
+        );
+        btnStop.classList.add('fib-display-none');
     });
 }
