@@ -33,9 +33,7 @@ export class FibCanvasAnimation {
         );
         this.#fibNumDomElements[2].classList.add('fib-hidden');
 
-        // animate '+'
         await this.#animateShow(this.#plusSignDomElement);
-        // animate arrows
         await Promise.all([
             this.#animateShow(this.#arrow1DomElement),
             this.#animateShow(this.#arrow2DomElement),
@@ -57,6 +55,50 @@ export class FibCanvasAnimation {
         this.#fibNumDomElements[2].classList.remove(
             'fib-hidden',
             'fib-num-3-animate-show'
+        );
+    }
+
+    async animateBackwardsBeforeCalculation() {
+        await this.#animateHide(this.#fibNumDomElements[2]);
+        await Promise.all([
+            this.#animateHide(this.#arrow1DomElement),
+            this.#animateHide(this.#arrow2DomElement),
+        ]);
+        await this.#animateHide(this.#plusSignDomElement);
+
+        await this.#animateFibNum2SlideBottomLeft();
+        await this.#animateFibNum1SlideRight();
+    }
+
+    async animateBackwardsAfterCalculation() {
+        this.#fibNumDomElements[1].classList.remove(
+            'fib-num-2-slide-bottom-left'
+        );
+        this.#fibNumDomElements[2].classList.remove('fib-animate-hide');
+
+        this.#fibNumDomElements[0].classList.remove('fib-num-1-slide-right');
+        this.#fibNumDomElements[0].classList.add('fib-hidden');
+
+        await this.#animateShow(this.#fibNumDomElements[0]);
+
+        await Promise.all([
+            this.#animateShow(this.#plusSignDomElement),
+            this.#animateShow(this.#arrow1DomElement),
+            this.#animateShow(this.#arrow2DomElement),
+        ]);
+
+        // clean up classes
+        [
+            this.#plusSignDomElement,
+            this.#arrow1DomElement,
+            this.#arrow2DomElement,
+            this.#fibNumDomElements[0],
+        ].forEach((el) =>
+            el.classList.remove(
+                'fib-animate-hide',
+                'fib-animate-show',
+                'fib-hidden'
+            )
         );
     }
 
@@ -84,6 +126,13 @@ export class FibCanvasAnimation {
         );
     }
 
+    #animateFibNum1SlideRight() {
+        return this.#applyAnimation(
+            this.#fibNumDomElements[0],
+            'fib-num-1-slide-right'
+        );
+    }
+
     #animateFibNum3SlideTopRight() {
         const fibNum3DomElement = this.#fibNumDomElements[2];
 
@@ -95,6 +144,20 @@ export class FibCanvasAnimation {
         return this.#applyAnimation(
             fibNum3DomElement,
             'fib-num-3-slide-top-right'
+        );
+    }
+
+    #animateFibNum2SlideBottomLeft() {
+        const fibNum2DomElement = this.#fibNumDomElements[1];
+
+        document.documentElement.style.setProperty(
+            '--fib-num-2-offset-path',
+            this.#getFibNum2OffsetPath(fibNum2DomElement)
+        );
+
+        return this.#applyAnimation(
+            fibNum2DomElement,
+            'fib-num-2-slide-bottom-left'
         );
     }
 
@@ -117,7 +180,18 @@ export class FibCanvasAnimation {
         const dX = 64 + width * 0.5;
         const dY = -48 - height;
 
-        // '"M0,0 c59,0 100,-59 100,-141"'
         return `"M0,${height} c${0.57 * dX},0 ${dX},${dY * 0.42} ${dX},${dY}"`;
+    }
+
+    #getFibNum2OffsetPath(fibNum2DomElement) {
+        const width = fibNum2DomElement.offsetWidth;
+        const height = fibNum2DomElement.offsetHeight;
+
+        const dX = -64 - width * 0.5;
+        const dY = 48 + height;
+
+        return `"M${width * 0.5},0 c0,${dY * 0.42} ${
+            dX * 0.43
+        },${dY} ${dX},${dY}"`;
     }
 }

@@ -7,6 +7,7 @@ export class FibCanvas {
     #plusSignDomElement;
     #arrow1DomElement;
     #arrow2DomElement;
+    #fibCanvasAnimation;
 
     #fibGenerator;
     #stepNumber;
@@ -20,20 +21,13 @@ export class FibCanvas {
     }
 
     async nextNumber() {
-        const fibCanvasAnimation = new FibCanvasAnimation(
-            this.#fibNumDomElements,
-            this.#plusSignDomElement,
-            this.#arrow1DomElement,
-            this.#arrow2DomElement
-        );
-
         this.#setNextStepNumber();
 
-        await fibCanvasAnimation.animateBeforeCalculation();
+        await this.#fibCanvasAnimation.animateBeforeCalculation();
 
         this.#setNextFibNumbers();
 
-        await fibCanvasAnimation.animateAfterCalculation();
+        await this.#fibCanvasAnimation.animateAfterCalculation();
     }
 
     async prevNumber() {
@@ -42,7 +36,12 @@ export class FibCanvas {
         }
 
         this.#setPrevStepNumber();
+
+        await this.#fibCanvasAnimation.animateBackwardsBeforeCalculation();
+
         this.#setPrevFibNumbers();
+
+        await this.#fibCanvasAnimation.animateBackwardsAfterCalculation();
     }
 
     resetToStart() {
@@ -56,6 +55,13 @@ export class FibCanvas {
         this.#arrow1DomElement = document.querySelector('.fib-arrow-left');
         this.#arrow2DomElement = document.querySelector('.fib-arrow-right');
         this.#fibStepNumDomElement = document.querySelector('.step-num');
+
+        this.#fibCanvasAnimation = new FibCanvasAnimation(
+            this.#fibNumDomElements,
+            this.#plusSignDomElement,
+            this.#arrow1DomElement,
+            this.#arrow2DomElement
+        );
     }
 
     #initNumbers() {

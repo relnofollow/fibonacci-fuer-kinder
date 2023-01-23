@@ -122,12 +122,25 @@ h3 {
     animation: 0.5s ease fibNum2SlideLeft forwards;
 }
 
+.fib-num-1-slide-right {
+    animation: 0.5s ease fibNum1SlideRight forwards;
+}
+
 .fib-num-3-slide-top-right {
     transform-origin: left bottom;
     offset-path: path(var(--fib-num-3-offset-path));
     offset-rotate: 0deg;
 
-    animation: 0.5s fibNum3SlideToRight forwards;
+    animation: 0.5s fibNum3SlideTopRight forwards;
+    /* animation-delay: 2s; */
+}
+
+.fib-num-2-slide-bottom-left {
+    transform-origin: center top;
+    offset-path: path(var(--fib-num-2-offset-path));
+    offset-rotate: 0deg;
+
+    animation: 0.5s fibNum2SlideBottomLeft forwards;
     /* animation-delay: 2s; */
 }
 
@@ -167,12 +180,20 @@ h3 {
     }
 }
 
-@keyframes fibNum3SlideToRight {
+@keyframes fibNum1SlideRight {
+    from {
+    }
+    to {
+        transform: translateX(calc(128px + 100%));
+    }
+}
+
+@keyframes fibNum3SlideTopRight {
     from {
         offset-distance: 0%;
     }
     50% {
-        font-size: 5rem;
+        /* font-size: 10rem; */
         transform: scale(1);
     }
     to {
@@ -181,11 +202,24 @@ h3 {
     }
 }
 
+@keyframes fibNum2SlideBottomLeft {
+    from {
+        offset-distance: 0%;
+    }
+    50% {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.236);
+        offset-distance: 100%;
+    }
+}
+
 @keyframes fibHide {
     from {
         opacity: 1;
     }
-    20% {
+    50% {
         opacity: 0;
     }
     to {
@@ -207,6 +241,7 @@ h3 {
         opacity: 0;
     }
     50% {
+        opacity: 1;
         transform: scale(1.2);
     }
     to {
@@ -222,6 +257,10 @@ h3 {
 .fib-sign {
     font-family: 'McLaren', cursive;
     font-size: 4rem;
+}
+
+.panel-actions {
+    transition: opacity 0.25s;
 }
 
 .panel-actions > .btn:not(:last-child) {
