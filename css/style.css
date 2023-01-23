@@ -57,7 +57,7 @@ h3 {
     justify-content: center;
 }
 
-.step {
+.step-num {
     font-family: 'McLaren', cursive;
     color: #73b0be;
     outline: 2px dashed #91dbe7;
@@ -66,9 +66,44 @@ h3 {
     padding: 1rem 1rem;
     border-radius: 1.4rem;
     transform: rotate(2deg);
+
+    position: relative;
 }
 
-.step-num {
+.step-num-progress-forwards,
+.step-num-progress-backwards {
+    background-image: linear-gradient(#f5e2d6, #f5e2d6);
+    background-position: 0% 0;
+    background-repeat: no-repeat;
+}
+
+.step-num-progress-forwards {
+    animation: 3s backgroundSizeIncrease linear forwards;
+    background-size: 0% auto;
+}
+
+.step-num-progress-backwards {
+    animation: 3s backgroundSizeReduce linear forwards;
+    background-size: 100% auto;
+}
+
+@keyframes backgroundSizeReduce {
+    from {
+    }
+    to {
+        background-size: 0% auto;
+    }
+}
+
+@keyframes backgroundSizeIncrease {
+    from {
+    }
+    to {
+        background-size: 100% auto;
+    }
+}
+
+.step-num-value {
     font-size: 22px;
 }
 
@@ -132,7 +167,6 @@ h3 {
     offset-rotate: 0deg;
 
     animation: 0.5s fibNum3SlideTopRight forwards;
-    /* animation-delay: 2s; */
 }
 
 .fib-num-2-slide-bottom-left {
@@ -141,7 +175,6 @@ h3 {
     offset-rotate: 0deg;
 
     animation: 0.5s fibNum2SlideBottomLeft forwards;
-    /* animation-delay: 2s; */
 }
 
 .fib-num-3-animate-show {

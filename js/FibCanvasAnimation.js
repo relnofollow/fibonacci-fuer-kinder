@@ -3,20 +3,24 @@ export class FibCanvasAnimation {
     #plusSignDomElement;
     #arrow1DomElement;
     #arrow2DomElement;
+    #stepNumDomElement;
 
     constructor(
         fibNumDomElements,
         plusSignDomElement,
         arrow1DomElement,
-        arrow2DomElement
+        arrow2DomElement,
+        stepNumDomElement
     ) {
         this.#fibNumDomElements = fibNumDomElements;
         this.#plusSignDomElement = plusSignDomElement;
         this.#arrow1DomElement = arrow1DomElement;
         this.#arrow2DomElement = arrow2DomElement;
+        this.#stepNumDomElement = stepNumDomElement;
     }
 
     async animateBeforeCalculation() {
+        this.#animateStepNumProgressForwards();
         await this.#animateHideElements();
         await this.#animateFibNum2SlideLeft();
         await this.#animateFibNum3SlideTopRight();
@@ -56,9 +60,11 @@ export class FibCanvasAnimation {
             'fib-hidden',
             'fib-num-3-animate-show'
         );
+        this.#stepNumDomElement.classList.remove('step-num-progress-forwards');
     }
 
     async animateBackwardsBeforeCalculation() {
+        this.#animateStepNumProgressBackwards();
         await this.#animateHide(this.#fibNumDomElements[2]);
         await Promise.all([
             this.#animateHide(this.#arrow1DomElement),
@@ -100,6 +106,7 @@ export class FibCanvasAnimation {
                 'fib-hidden'
             )
         );
+        this.#stepNumDomElement.classList.remove('step-num-progress-backwards');
     }
 
     #animateHideElements() {
@@ -109,6 +116,20 @@ export class FibCanvasAnimation {
             this.#animateHide(this.#arrow1DomElement),
             this.#animateHide(this.#arrow2DomElement),
         ]);
+    }
+
+    #animateStepNumProgressForwards() {
+        this.#applyAnimation(
+            this.#stepNumDomElement,
+            'step-num-progress-forwards'
+        );
+    }
+
+    #animateStepNumProgressBackwards() {
+        this.#applyAnimation(
+            this.#stepNumDomElement,
+            'step-num-progress-backwards'
+        );
     }
 
     async #animateHide(domElement) {

@@ -35,13 +35,13 @@ export class FibCanvas {
             return;
         }
 
-        this.#setPrevStepNumber();
-
         await this.#fibCanvasAnimation.animateBackwardsBeforeCalculation();
 
         this.#setPrevFibNumbers();
 
         await this.#fibCanvasAnimation.animateBackwardsAfterCalculation();
+
+        this.#setPrevStepNumber();
     }
 
     resetToStart() {
@@ -60,7 +60,8 @@ export class FibCanvas {
             this.#fibNumDomElements,
             this.#plusSignDomElement,
             this.#arrow1DomElement,
-            this.#arrow2DomElement
+            this.#arrow2DomElement,
+            this.#fibStepNumDomElement
         );
     }
 
@@ -115,9 +116,9 @@ export class FibCanvas {
     }
 
     #renderStepNumber() {
-        this.#fibStepNumDomElement.innerHTML = `${this.#formatNumber(
-            this.#stepNumber
-        )}.`;
+        this.#fibStepNumDomElement.querySelector(
+            '.step-num-value'
+        ).innerHTML = `${this.#formatNumber(this.#stepNumber)}.`;
     }
 
     #formatNumber(num) {
