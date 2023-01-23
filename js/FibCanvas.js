@@ -44,6 +44,29 @@ export class FibCanvas {
         this.#setPrevStepNumber();
     }
 
+    async playForwards() {
+        this.autoplay = true;
+
+        while (this.autoplay) {
+            // TODO: fix problem with step progress animation
+            await this.nextNumber();
+        }
+    }
+
+    async playBackwards() {
+        this.autoplay = true;
+
+        while (this.autoplay && this.#stepNumber > 1) {
+            // TODO: fix problem with step progress animation
+            await this.prevNumber();
+        }
+    }
+
+    // TODO: stop animation immediately
+    stopAnimation() {
+        this.autoplay = false;
+    }
+
     resetToStart() {
         this.#initNumbers();
         this.#renderStepNumber();
