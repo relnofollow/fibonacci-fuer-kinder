@@ -1,15 +1,32 @@
-export function* fibGenerator() {
-    let fib1 = 0;
-    let fib2 = 1;
+export class FibGenerator {
+    #numbers;
 
-    yield 0;
-    yield 1;
+    constructor() {}
 
-    while (true) {
-        const next = fib1 + fib2;
-        fib1 = fib2;
-        fib2 = next;
+    next() {
+        if (!this.#numbers) {
+            this.#numbers = [0, 1, 1];
+            return this.#numbers;
+        }
 
-        yield next;
+        this.#numbers.shift();
+        this.#numbers.push(this.#numbers.at(-1) + this.#numbers.at(-2));
+
+        return this.#numbers;
+    }
+
+    prev() {
+        if (this.#numbers[0] === 0) {
+            return this.#numbers;
+        }
+
+        this.#numbers.pop();
+        this.#numbers.unshift(this.#numbers[1] - this.#numbers[0]);
+
+        return this.#numbers;
+    }
+
+    reset() {
+        this.#numbers = null;
     }
 }

@@ -25,6 +25,7 @@ export class FibCanvasAnimation {
     }
 
     async animateAfterCalculation() {
+        // TODO: cleanup method
         this.#fibNumDomElements[0].classList.remove('fib-animate-hide');
         this.#fibNumDomElements[1].classList.remove('fib-num-2-slide-left');
         this.#fibNumDomElements[2].classList.remove(

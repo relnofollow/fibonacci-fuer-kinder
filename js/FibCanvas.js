@@ -1,4 +1,4 @@
-import { fibGenerator } from './FibGenerator.js';
+import { FibGenerator } from './FibGenerator.js';
 import { FibCanvasAnimation } from './FibCanvasAnimation.js';
 
 export class FibCanvas {
@@ -27,13 +27,22 @@ export class FibCanvas {
             this.#arrow2DomElement
         );
 
-        this.#updateStepNumber();
+        this.#setNextStepNumber();
 
         await fibCanvasAnimation.animateBeforeCalculation();
 
-        this.#updateFibNumbers();
+        this.#setNextFibNumbers();
 
         await fibCanvasAnimation.animateAfterCalculation();
+    }
+
+    async prevNumber() {
+        if (this.#stepNumber === 1) {
+            return;
+        }
+
+        this.#setPrevStepNumber();
+        this.#setPrevFibNumbers();
     }
 
     resetToStart() {
@@ -51,30 +60,40 @@ export class FibCanvas {
 
     #initNumbers() {
         this.#stepNumber = 1;
-        this.#fibGenerator = fibGenerator();
-        this.#fibNumbers = [];
-        for (let i = 1; i <= 3; i++) {
-            this.#fibNumbers.push(this.#fibGenerator.next().value);
-        }
+        this.#fibGenerator = new FibGenerator();
+        this.#fibNumbers = this.#fibGenerator.next();
     }
 
     #resetNumbers() {
         this.#initNumbers();
     }
 
-    #updateStepNumber() {
+    #setNextStepNumber() {
         this.#stepNumber++;
         this.#renderStepNumber();
     }
 
-    #updateFibNumbers() {
+    #setPrevStepNumber() {
+        this.#stepNumber--;
+        this.#renderStepNumber();
+    }
+
+    #setNextFibNumbers() {
         this.#generateNextFibNumber();
         this.#renderFibNumbers();
     }
 
+    #setPrevFibNumbers() {
+        this.#generatePrevFibNumber();
+        this.#renderFibNumbers();
+    }
+
     #generateNextFibNumber() {
-        this.#fibNumbers.shift();
-        this.#fibNumbers.push(this.#fibGenerator.next().value);
+        this.#fibNumbers = this.#fibGenerator.next();
+    }
+
+    #generatePrevFibNumber() {
+        this.#fibNumbers = this.#fibGenerator.prev();
     }
 
     #renderFibNumbers() {
