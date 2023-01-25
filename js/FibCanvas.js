@@ -48,8 +48,8 @@ export class FibCanvas {
         this.autoplay = true;
 
         while (this.autoplay) {
-            // TODO: fix problem with step progress animation
             await this.nextNumber();
+            await this.#tick();
         }
     }
 
@@ -57,20 +57,27 @@ export class FibCanvas {
         this.autoplay = true;
 
         while (this.autoplay && this.#stepNumber > 1) {
-            // TODO: fix problem with step progress animation
             await this.prevNumber();
+            await this.#tick();
         }
     }
 
     // TODO: stop animation immediately
-    stopAnimation() {
+    async stopAnimation() {
         this.autoplay = false;
+        await this.#fibCanvasAnimation.stopAnimation();
     }
 
     resetToStart() {
         this.#initNumbers();
         this.#renderStepNumber();
         this.#renderFibNumbers();
+    }
+
+    async #tick() {
+        return new Promise((resolve) => {
+            setTimeout(resolve, 0);
+        });
     }
 
     #initDomElements() {

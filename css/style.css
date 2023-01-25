@@ -71,25 +71,27 @@ h1 {
 }
 
 .step-num-progress-forwards {
-    animation: 3s backgroundSizeIncrease linear forwards;
+    animation: 3s background-size-increase linear forwards;
     background-size: 0% auto;
 }
 
 .step-num-progress-backwards {
-    animation: 3s backgroundSizeReduce linear forwards;
+    animation: 3s background-size-reduce linear forwards;
     background-size: 100% auto;
 }
 
-@keyframes backgroundSizeReduce {
+@keyframes background-size-reduce {
     from {
+        background-size: 100% auto;
     }
     to {
         background-size: 0% auto;
     }
 }
 
-@keyframes backgroundSizeIncrease {
+@keyframes background-size-increase {
     from {
+        background-size: 0% auto;
     }
     to {
         background-size: 100% auto;
@@ -147,11 +149,11 @@ h1 {
 }
 
 .fib-num-2-slide-left {
-    animation: 0.5s ease fibNum2SlideLeft forwards;
+    animation: 0.5s ease fib-num-2-slide-left forwards;
 }
 
 .fib-num-1-slide-right {
-    animation: 0.5s ease fibNum1SlideRight forwards;
+    animation: 0.5s ease fib-num-1-slide-right forwards;
 }
 
 .fib-num-3-slide-top-right {
@@ -159,7 +161,7 @@ h1 {
     offset-path: path(var(--fib-num-3-offset-path));
     offset-rotate: 0deg;
 
-    animation: 0.5s fibNum3SlideTopRight forwards;
+    animation: 0.5s fib-num-3-slide-top-right forwards;
 }
 
 .fib-num-2-slide-bottom-left {
@@ -167,19 +169,19 @@ h1 {
     offset-path: path(var(--fib-num-2-offset-path));
     offset-rotate: 0deg;
 
-    animation: 0.5s fibNum2SlideBottomLeft forwards;
+    animation: 0.5s fib-num-2-slide-bottom-left forwards;
 }
 
 .fib-num-3-animate-show {
-    animation: 0.5s ease fibNum3AnimateShow forwards;
+    animation: 0.5s ease fib-num-3-animate-show forwards;
 }
 
 .fib-animate-hide {
-    animation: 0.5s ease fibHide forwards;
+    animation: 0.5s ease fib-hide forwards;
 }
 
 .fib-animate-show {
-    animation: 0.5s ease fibShow forwards;
+    animation: 0.5s ease fib-show forwards;
 }
 
 .fib-arrow-left,
@@ -198,7 +200,7 @@ h1 {
     left: calc(100% + 10px);
 }
 
-@keyframes fibNum2SlideLeft {
+@keyframes fib-num-2-slide-left {
     from {
     }
     to {
@@ -206,7 +208,7 @@ h1 {
     }
 }
 
-@keyframes fibNum1SlideRight {
+@keyframes fib-num-1-slide-right {
     from {
     }
     to {
@@ -214,7 +216,7 @@ h1 {
     }
 }
 
-@keyframes fibNum3SlideTopRight {
+@keyframes fib-num-3-slide-top-right {
     from {
         offset-distance: 0%;
     }
@@ -228,7 +230,7 @@ h1 {
     }
 }
 
-@keyframes fibNum2SlideBottomLeft {
+@keyframes fib-num-2-slide-bottom-left {
     from {
         offset-distance: 0%;
     }
@@ -241,7 +243,7 @@ h1 {
     }
 }
 
-@keyframes fibHide {
+@keyframes fib-hide {
     from {
         opacity: 1;
     }
@@ -253,7 +255,7 @@ h1 {
     }
 }
 
-@keyframes fibShow {
+@keyframes fib-show {
     from {
         opacity: 0;
     }
@@ -262,7 +264,7 @@ h1 {
     }
 }
 
-@keyframes fibNum3AnimateShow {
+@keyframes fib-num-3-animate-show {
     from {
         opacity: 0;
     }

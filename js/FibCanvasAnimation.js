@@ -24,8 +24,6 @@ export class FibCanvasAnimation {
         await this.#animateHideElements();
         await this.#animateFibNum2SlideLeft();
         await this.#animateFibNum3SlideTopRight();
-
-        return Promise.resolve();
     }
 
     async animateAfterCalculation() {
@@ -108,6 +106,8 @@ export class FibCanvasAnimation {
         );
         this.#stepNumDomElement.classList.remove('step-num-progress-backwards');
     }
+
+    async stopAnimation() {}
 
     #animateHideElements() {
         return Promise.all([
