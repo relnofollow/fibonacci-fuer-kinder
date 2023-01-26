@@ -1,20 +1,25 @@
 import { FibGenerator } from './FibGenerator.js';
 import { FibCanvasAnimation } from './FibCanvasAnimation.js';
 
+const DISPLAY_TIME_PERIOD_MS = 1000;
+const ANIMATION_STEP_TIME_PERIOD_MS = 500;
+
 export class FibCanvas {
     #fibNumDomElements = [];
     #fibStepNumDomElement = [];
     #plusSignDomElement;
     #arrow1DomElement;
     #arrow2DomElement;
-    #fibCanvasAnimation;
 
+    #fibCanvasAnimation;
     #fibGenerator;
     #stepNumber;
     #fibNumbers = [];
     #numberFormatter = new Intl.NumberFormat('de-DE', {});
+
     #autoPlay;
-    #animationInProgress = false;
+    #animationSpeedDivider;
+    #animationInProgress;
 
     stepChanged$ = new rxjs.Subject();
     autoPlayStarted$ = new rxjs.Subject();
@@ -27,6 +32,7 @@ export class FibCanvas {
         this.#initDomElements();
         this.#initNumbers();
         this.#renderFibNumbers();
+        this.setAnimationSpeedDivider(1);
     }
 
     get stepNumber() {
@@ -37,56 +43,62 @@ export class FibCanvas {
         return this.#autoPlay;
     }
 
+    get isFirstStep() {
+        return this.#stepNumber === 1;
+    }
+
     async stepForward() {
         await this.stop();
-        await this.#tick();
+        await this.#waitATick();
 
         this.#nextNumber();
     }
 
     async stepBackward() {
-        if (this.#isFirstNumber) {
+        if (this.isFirstStep) {
             return;
         }
 
         await this.stop();
-        await this.#tick();
+        await this.#waitATick();
 
         this.#prevNumber();
     }
 
-    async playForward(speed = 1) {
+    async playForward() {
         await this.#stopAfterAnimationIsComplete();
-        await this.#tick();
+        await this.#waitATick();
 
         this.#autoPlay = true;
         this.autoPlayStarted$.next(true);
 
         while (this.#autoPlay) {
-            await this.#nextNumber();
-            await this.#tick(); // Make a pause to reset step progress animation between iterations
+            await this.#nextNumber(
+                DISPLAY_TIME_PERIOD_MS / this.#animationSpeedDivider
+            );
         }
 
         this.autoPlayStopped$.next(true);
     }
 
-    async playBackward(speed = 1) {
+    async playBackward() {
         await this.#stopAfterAnimationIsComplete();
-        await this.#tick();
+        await this.#waitATick();
 
-        if (this.#isFirstNumber) {
+        if (this.isFirstStep) {
             return;
         }
 
         this.#autoPlay = true;
         this.autoPlayStarted$.next(true);
 
-        while (this.#autoPlay && !this.#isFirstNumber) {
-            await this.#prevNumber();
-            await this.#tick(); // Make a pause to reset step progress animation between iterations
+        while (this.#autoPlay && !this.isFirstStep) {
+            await this.#prevNumber(
+                DISPLAY_TIME_PERIOD_MS / this.#animationSpeedDivider
+            );
         }
 
-        if (this.#isFirstNumber) {
+        if (this.isFirstStep) {
             this.#autoPlay = false;
             this.autoPlayStoppedAtFirstNumber$.next(true);
         }
@@ -114,7 +126,7 @@ export class FibCanvas {
     }
 
     async resetToStart() {
-        if (this.#isFirstNumber) {
+        if (this.isFirstStep) {
             return;
         }
 
@@ -125,8 +137,13 @@ export class FibCanvas {
         this.#renderFibNumbers();
     }
 
-    get #isFirstNumber() {
-        return this.#stepNumber === 1;
+    async setAnimationSpeedDivider(divider) {
+        this.#animationSpeedDivider = divider;
+
+        document.documentElement.style.setProperty(
+            '--fib-animation-speed',
+            `${(ANIMATION_STEP_TIME_PERIOD_MS / 1000 / divider).toFixed(2)}s`
+        );
     }
 
     async #stopAfterAnimationIsComplete() {
@@ -141,7 +158,7 @@ export class FibCanvas {
         await rxjs.firstValueFrom(this.animationStopped$);
     }
 
-    async #nextNumber() {
+    async #nextNumber(displayTimePeriod = 0) {
         this.#setAnimationInProgress(true);
 
         this.#setNextStepNumber();
@@ -152,10 +169,14 @@ export class FibCanvas {
 
         await this.#fibCanvasAnimation.animateAfterCalculation();
 
+        if (displayTimePeriod) {
+            await this.#waitATick(displayTimePeriod);
+        }
+
         this.#setAnimationInProgress(false);
     }
 
-    async #prevNumber() {
+    async #prevNumber(displayTimePeriod = 0) {
         this.#setAnimationInProgress(true);
 
         await this.#fibCanvasAnimation.animateBackwardsBeforeCalculation();
@@ -166,12 +187,16 @@ export class FibCanvas {
 
         this.#setPrevStepNumber();
 
+        if (displayTimePeriod) {
+            await this.#waitATick(displayTimePeriod);
+        }
+
         this.#setAnimationInProgress(false);
     }
 
-    async #tick() {
+    async #waitATick(timeout = 0) {
         return new Promise((resolve) => {
-            setTimeout(resolve, 0);
+            setTimeout(resolve, timeout);
         });
     }
 

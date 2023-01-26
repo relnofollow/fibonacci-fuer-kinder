@@ -157,7 +157,7 @@ h1 {
     flex-direction: row;
     align-items: center;
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .panel-actions .btn-reset {

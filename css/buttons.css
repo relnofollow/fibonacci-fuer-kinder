@@ -27,20 +27,20 @@ button:disabled {
     border-radius: 1.4rem;
 }
 
-.btn-outlined {
+.btn-outline {
     background-color: #a7ebf6;
     color: #4e87a0;
     outline: 2px dotted #71c1e4;
     outline-offset: -4px;
-    width: 83px;
+    width: 70px;
     height: 40px;
     border-radius: 2rem;
 }
 
-.btn-outlined:hover,
-.btn-outlined-active {
-    color: #ea6b6e;
-    outline: 2px dotted #ea6b6e;
+.btn-outline-active {
+    color: #fff;
+    outline: 2px dotted #85d8e5;
+    background-color: #1aafbc;
 }
 
 .btn-red {
@@ -53,11 +53,13 @@ button:disabled {
 }
 
 .btn-radio {
-    width: 73px;
-    height: 59px;
-    font-size: 24px;
+    width: 108px;
+    height: 73px;
+    font-size: 16px;
+    line-height: 1.3;
     outline: 2px dashed #6a9d27;
     background-color: #74af27;
+    text-shadow: 2px 2px 3px rgb(22 22 23 / 11%);
 }
 
 .btn-radio-active {
@@ -85,7 +87,6 @@ button:disabled {
 
 .btn-stop {
     width: 80px;
-    height: 59px;
     outline: 2px dashed #e95558;
     background-color: #ff6b6f;
     border-radius: 0.3rem;

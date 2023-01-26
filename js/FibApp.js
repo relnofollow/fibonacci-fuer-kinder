@@ -1,5 +1,7 @@
 import { FibCanvas } from './FibCanvas.js';
 
+const SPEED_PRESETS = [1, 2, 3, 10, 50];
+
 export class FibApp {
     #fibCanvas;
 
@@ -9,6 +11,7 @@ export class FibApp {
     #btnPlayForwards;
     #btnPlayBackwards;
     #btnStop;
+    #btnsSpeed;
 
     constructor() {}
 
@@ -26,6 +29,8 @@ export class FibApp {
         this.#btnPlayForwards = document.querySelector('.fib-forwards');
         this.#btnPlayBackwards = document.querySelector('.fib-backwards');
         this.#btnStop = document.querySelector('.fib-stop');
+
+        this.#btnsSpeed = document.querySelectorAll('.fib-speed');
     }
 
     #bindDomEventsListeners() {
@@ -40,6 +45,7 @@ export class FibApp {
         });
 
         this.#btnReset.addEventListener('click', async () => {
+            this.#removeBtnRadioActiveClass();
             this.#fibCanvas.resetToStart();
         });
 
@@ -60,6 +66,17 @@ export class FibApp {
         this.#btnStop.addEventListener('click', () => {
             this.#fibCanvas.stop();
             this.#removeBtnRadioActiveClass();
+        });
+
+        this.#btnsSpeed.forEach((el, i) => {
+            el.addEventListener('click', () => {
+                this.#btnsSpeed.forEach((el) =>
+                    el.classList.remove('btn-outline-active')
+                );
+                el.classList.add('btn-outline-active');
+
+                this.#fibCanvas.setAnimationSpeedDivider(SPEED_PRESETS[i]);
+            });
         });
     }
 

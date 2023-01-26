@@ -6,21 +6,23 @@
 }
 
 .step-num-progress-forwards {
-    animation: 3s background-size-increase linear forwards;
+    animation: calc(var(--fib-animation-speed) * 6) background-size-increase
+        linear forwards;
     background-size: 0% auto;
 }
 
 .step-num-progress-backwards {
-    animation: 3s background-size-reduce linear forwards;
+    animation: calc(var(--fib-animation-speed) * 6) background-size-reduce
+        linear forwards;
     background-size: 100% auto;
 }
 
 .fib-num-2-slide-left {
-    animation: 0.5s ease fib-num-2-slide-left forwards;
+    animation: var(--fib-animation-speed) ease fib-num-2-slide-left forwards;
 }
 
 .fib-num-1-slide-right {
-    animation: 0.5s ease fib-num-1-slide-right forwards;
+    animation: var(--fib-animation-speed) ease fib-num-1-slide-right forwards;
 }
 
 .fib-num-3-slide-top-right {
@@ -28,7 +30,7 @@
     offset-path: path(var(--fib-num-3-offset-path));
     offset-rotate: 0deg;
 
-    animation: 0.5s fib-num-3-slide-top-right forwards;
+    animation: var(--fib-animation-speed) fib-num-3-slide-top-right forwards;
 }
 
 .fib-num-2-slide-bottom-left {
@@ -36,19 +38,19 @@
     offset-path: path(var(--fib-num-2-offset-path));
     offset-rotate: 0deg;
 
-    animation: 0.5s fib-num-2-slide-bottom-left forwards;
+    animation: var(--fib-animation-speed) fib-num-2-slide-bottom-left forwards;
 }
 
 .fib-num-3-animate-show {
-    animation: 0.5s ease fib-num-3-animate-show forwards;
+    animation: var(--fib-animation-speed) ease fib-num-3-animate-show forwards;
 }
 
 .fib-animate-hide {
-    animation: 0.5s ease fib-hide forwards;
+    animation: var(--fib-animation-speed) ease fib-hide forwards;
 }
 
 .fib-animate-show {
-    animation: 0.5s ease fib-show forwards;
+    animation: var(--fib-animation-speed) ease fib-show forwards;
 }
 
 @keyframes background-size-increase {
