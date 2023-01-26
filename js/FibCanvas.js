@@ -13,8 +13,14 @@ export class FibCanvas {
     #stepNumber;
     #fibNumbers = [];
     #numberFormatter = new Intl.NumberFormat('de-DE', {});
+    #autoPlay;
+    #animationInProgress = false;
 
-    $stepComplete = new rxjs.Subject();
+    stepChanged$ = new rxjs.Subject();
+    autoPlayStarted$ = new rxjs.Subject();
+    autoPlayStopped$ = new rxjs.Subject();
+    animationStarted$ = new rxjs.Subject();
+    animationStopped$ = new rxjs.Subject();
 
     constructor() {
         this.#initDomElements();
@@ -22,8 +28,18 @@ export class FibCanvas {
         this.#renderFibNumbers();
     }
 
+    get stepNumber() {
+        return this.#stepNumber;
+    }
+
+    get autoPlay() {
+        return this.#autoPlay;
+    }
+
     async nextNumber() {
         this.#setNextStepNumber();
+
+        this.#setAnimationInProgress(true);
 
         await this.#fibCanvasAnimation.animateBeforeCalculation();
 
@@ -31,14 +47,15 @@ export class FibCanvas {
 
         await this.#fibCanvasAnimation.animateAfterCalculation();
 
-        this.$stepComplete.next(true);
+        this.#setAnimationInProgress(false);
     }
 
     async prevNumber() {
         if (this.#stepNumber === 1) {
-            this.$stepComplete.next(true);
             return;
         }
+
+        this.#setAnimationInProgress(true);
 
         await this.#fibCanvasAnimation.animateBackwardsBeforeCalculation();
 
@@ -48,45 +65,63 @@ export class FibCanvas {
 
         this.#setPrevStepNumber();
 
-        this.$stepComplete.next(true);
+        this.#setAnimationInProgress(false);
     }
 
     async playForwards(speed = 1) {
-        this.autoplay = true;
+        this.#autoPlay = true;
 
-        while (this.autoplay) {
+        this.autoPlayStarted$.next(true);
+
+        while (this.#autoPlay) {
             await this.nextNumber();
             await this.#tick(); // Make a pause to reset step progress animation between iterations
         }
+
+        this.autoPlayStopped$.next(true);
     }
 
     async playBackwards(speed = 1) {
-        this.autoplay = true;
+        if (this.#stepNumber === 1) {
+            return;
+        }
 
-        while (this.autoplay && this.#stepNumber > 1) {
+        this.#autoPlay = true;
+
+        this.autoPlayStarted$.next(true);
+
+        while (this.#autoPlay && this.#stepNumber > 1) {
             await this.prevNumber();
             await this.#tick(); // Make a pause to reset step progress animation between iterations
         }
+
+        this.autoPlayStopped$.next(true);
     }
 
     // TODO: stop animation immediately
     async stop() {
-        if (!this.autoplay) {
+        if (!this.#animationInProgress) {
             return Promise.resolve();
         }
 
-        this.autoplay = false;
+        if (this.#autoPlay) {
+            this.#autoPlay = false;
+        }
 
         this.#fibCanvasAnimation.stopAnimation();
 
-        const $stepComplete = this.$stepComplete.pipe(
+        const animationStopped$ = this.animationStopped$.pipe(
             rxjs.tap(() => this.#fibCanvasAnimation.startAnimation())
         );
 
-        await rxjs.firstValueFrom($stepComplete);
+        await rxjs.firstValueFrom(animationStopped$);
     }
 
     resetToStart() {
+        if (this.#stepNumber === 1) {
+            return;
+        }
+
         this.#initNumbers();
         this.#renderStepNumber();
         this.#renderFibNumbers();
@@ -96,6 +131,16 @@ export class FibCanvas {
         return new Promise((resolve) => {
             setTimeout(resolve, 0);
         });
+    }
+
+    #setAnimationInProgress(inProgress) {
+        this.#animationInProgress = inProgress;
+
+        if (inProgress) {
+            this.animationStarted$.next(true);
+        } else {
+            this.animationStopped$.next(true);
+        }
     }
 
     #initDomElements() {
@@ -118,16 +163,22 @@ export class FibCanvas {
         this.#stepNumber = 1;
         this.#fibGenerator = new FibGenerator();
         this.#fibNumbers = this.#fibGenerator.next();
+
+        this.stepChanged$.next(this.#stepNumber);
     }
 
     #setNextStepNumber() {
         this.#stepNumber++;
         this.#renderStepNumber();
+
+        this.stepChanged$.next(this.#stepNumber);
     }
 
     #setPrevStepNumber() {
         this.#stepNumber--;
         this.#renderStepNumber();
+
+        this.stepChanged$.next(this.#stepNumber);
     }
 
     #setNextFibNumbers() {

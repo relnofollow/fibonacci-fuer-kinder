@@ -10,13 +10,13 @@ button {
     text-align: center;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     opacity: 0.8;
 }
 
 button:disabled {
-    pointer-events: none;
     opacity: 0.45;
+    cursor: default;
 }
 
 .btn-dashed {
@@ -40,6 +40,7 @@ button:disabled {
 .btn-outlined:hover,
 .btn-outlined-active {
     color: #ea6b6e;
+    outline: 2px dotted #ea6b6e;
 }
 
 .btn-red {
