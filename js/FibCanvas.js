@@ -21,6 +21,7 @@ export class FibCanvas {
     autoPlayStopped$ = new rxjs.Subject();
     animationStarted$ = new rxjs.Subject();
     animationStopped$ = new rxjs.Subject();
+    autoPlayStoppedAtFirstNumber$ = new rxjs.Subject();
 
     constructor() {
         this.#initDomElements();
@@ -36,10 +37,114 @@ export class FibCanvas {
         return this.#autoPlay;
     }
 
-    async nextNumber() {
-        this.#setNextStepNumber();
+    async stepForward() {
+        await this.stop();
+        await this.#tick();
 
+        this.#nextNumber();
+    }
+
+    async stepBackward() {
+        if (this.#isFirstNumber) {
+            return;
+        }
+
+        await this.stop();
+        await this.#tick();
+
+        this.#prevNumber();
+    }
+
+    async playForward(speed = 1) {
+        await this.#stopAfterAnimationIsComplete();
+        await this.#tick();
+
+        this.#autoPlay = true;
+        this.autoPlayStarted$.next(true);
+
+        while (this.#autoPlay) {
+            await this.#nextNumber();
+            await this.#tick(); // Make a pause to reset step progress animation between iterations
+        }
+
+        this.autoPlayStopped$.next(true);
+    }
+
+    async playBackward(speed = 1) {
+        await this.#stopAfterAnimationIsComplete();
+        await this.#tick();
+
+        if (this.#isFirstNumber) {
+            return;
+        }
+
+        this.#autoPlay = true;
+        this.autoPlayStarted$.next(true);
+
+        while (this.#autoPlay && !this.#isFirstNumber) {
+            await this.#prevNumber();
+            await this.#tick(); // Make a pause to reset step progress animation between iterations
+        }
+
+        if (this.#isFirstNumber) {
+            this.#autoPlay = false;
+            this.autoPlayStoppedAtFirstNumber$.next(true);
+        }
+
+        this.autoPlayStopped$.next(true);
+    }
+
+    async stop() {
+        if (!this.#animationInProgress) {
+            return Promise.resolve();
+        }
+
+        if (this.#autoPlay) {
+            this.#autoPlay = false;
+        }
+
+        // TODO: stop animation immediately
+        this.#fibCanvasAnimation.stopAnimation();
+
+        const animationStopped$ = this.animationStopped$.pipe(
+            rxjs.tap(() => this.#fibCanvasAnimation.startAnimation())
+        );
+
+        await rxjs.firstValueFrom(animationStopped$);
+    }
+
+    async resetToStart() {
+        if (this.#isFirstNumber) {
+            return;
+        }
+
+        await this.stop();
+
+        this.#initNumbers();
+        this.#renderStepNumber();
+        this.#renderFibNumbers();
+    }
+
+    get #isFirstNumber() {
+        return this.#stepNumber === 1;
+    }
+
+    async #stopAfterAnimationIsComplete() {
+        if (!this.#animationInProgress) {
+            return Promise.resolve();
+        }
+
+        if (this.#autoPlay) {
+            this.#autoPlay = false;
+        }
+
+        await rxjs.firstValueFrom(this.animationStopped$);
+    }
+
+    async #nextNumber() {
         this.#setAnimationInProgress(true);
+
+        this.#setNextStepNumber();
 
         await this.#fibCanvasAnimation.animateBeforeCalculation();
 
@@ -50,11 +155,7 @@ export class FibCanvas {
         this.#setAnimationInProgress(false);
     }
 
-    async prevNumber() {
-        if (this.#stepNumber === 1) {
-            return;
-        }
-
+    async #prevNumber() {
         this.#setAnimationInProgress(true);
 
         await this.#fibCanvasAnimation.animateBackwardsBeforeCalculation();
@@ -66,65 +167,6 @@ export class FibCanvas {
         this.#setPrevStepNumber();
 
         this.#setAnimationInProgress(false);
-    }
-
-    async playForwards(speed = 1) {
-        this.#autoPlay = true;
-
-        this.autoPlayStarted$.next(true);
-
-        while (this.#autoPlay) {
-            await this.nextNumber();
-            await this.#tick(); // Make a pause to reset step progress animation between iterations
-        }
-
-        this.autoPlayStopped$.next(true);
-    }
-
-    async playBackwards(speed = 1) {
-        if (this.#stepNumber === 1) {
-            return;
-        }
-
-        this.#autoPlay = true;
-
-        this.autoPlayStarted$.next(true);
-
-        while (this.#autoPlay && this.#stepNumber > 1) {
-            await this.prevNumber();
-            await this.#tick(); // Make a pause to reset step progress animation between iterations
-        }
-
-        this.autoPlayStopped$.next(true);
-    }
-
-    // TODO: stop animation immediately
-    async stop() {
-        if (!this.#animationInProgress) {
-            return Promise.resolve();
-        }
-
-        if (this.#autoPlay) {
-            this.#autoPlay = false;
-        }
-
-        this.#fibCanvasAnimation.stopAnimation();
-
-        const animationStopped$ = this.animationStopped$.pipe(
-            rxjs.tap(() => this.#fibCanvasAnimation.startAnimation())
-        );
-
-        await rxjs.firstValueFrom(animationStopped$);
-    }
-
-    resetToStart() {
-        if (this.#stepNumber === 1) {
-            return;
-        }
-
-        this.#initNumbers();
-        this.#renderStepNumber();
-        this.#renderFibNumbers();
     }
 
     async #tick() {

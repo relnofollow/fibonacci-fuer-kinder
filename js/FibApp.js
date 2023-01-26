@@ -31,16 +31,15 @@ export class FibApp {
     #bindDomEventsListeners() {
         this.#btnNext.addEventListener('click', async () => {
             await this.#fibCanvas.stop();
-            this.#fibCanvas.nextNumber();
+            this.#fibCanvas.stepForward();
         });
 
         this.#btnPrev.addEventListener('click', async () => {
             await this.#fibCanvas.stop();
-            this.#fibCanvas.prevNumber();
+            this.#fibCanvas.stepBackward();
         });
 
         this.#btnReset.addEventListener('click', async () => {
-            await this.#fibCanvas.stop();
             this.#fibCanvas.resetToStart();
         });
 
@@ -48,20 +47,19 @@ export class FibApp {
             this.#removeBtnRadioActiveClass();
             this.#btnPlayForwards.classList.add('btn-radio-active');
 
-            await this.#fibCanvas.stop();
-            this.#fibCanvas.playForwards();
+            this.#fibCanvas.playForward();
         });
 
         this.#btnPlayBackwards.addEventListener('click', async () => {
             this.#removeBtnRadioActiveClass();
             this.#btnPlayBackwards.classList.add('btn-radio-active');
 
-            await this.#fibCanvas.stop();
-            this.#fibCanvas.playBackwards();
+            this.#fibCanvas.playBackward();
         });
 
         this.#btnStop.addEventListener('click', () => {
             this.#fibCanvas.stop();
+            this.#removeBtnRadioActiveClass();
         });
     }
 
@@ -74,7 +72,9 @@ export class FibApp {
         this.#fibCanvas.autoPlayStopped$.subscribe(() => {
             this.#btnNext.disabled = false;
             this.#btnPrev.disabled = false;
+        });
 
+        this.#fibCanvas.autoPlayStoppedAtFirstNumber$.subscribe(() => {
             this.#removeBtnRadioActiveClass();
         });
     }
