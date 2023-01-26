@@ -58,9 +58,7 @@
                                 class="btn-dashed btn-radio fib-backwards"
                                 title="Auto zurück"
                             >
-                                <i
-                                    class="fa-solid fa-play fa-flip-horizontal"
-                                ></i>
+                                <i class="fa-solid fa-angle-left"></i>
                                 Auto
                             </button>
                             <button
@@ -68,7 +66,8 @@
                                 class="btn-dashed btn-radio fib-prev"
                                 title="Ein Schritt zurück"
                             >
-                                Voriger Schritt
+                                <i class="fa-solid fa-angle-left"></i
+                                >&nbsp;Voriger Schritt
                             </button>
                             <button
                                 type="button"
@@ -83,13 +82,14 @@
                                 title="Ein Schritt weiter"
                             >
                                 Nächster Schritt
+                                <i class="fa-solid fa-angle-right"></i>
                             </button>
                             <button
                                 type="button"
                                 class="btn-dashed btn-radio fib-forwards"
                                 title="Auto weiter"
                             >
-                                Auto <i class="fa-solid fa-play"></i>
+                                Auto <i class="fa-solid fa-angle-right"></i>
                             </button>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                 </div>
             </div>
         </main>
-        <script src="node_modules/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+        <script src="https://unpkg.com/rxjs@7.8.0/dist/bundles/rxjs.umd.min.js"></script>
         <script src="js/index.js" type="module"></script>
     </body>
 </html>

@@ -29,7 +29,7 @@ export class FibCanvasAnimation {
         await this.#animateFibNum3SlideTopRight();
     }
 
-    async animateAfterCalculation() {
+    async animateAfterCalculation(displayTimePeriod = 0) {
         // TODO: cleanup method
         this.#fibNumDomElements[0].classList.remove('fib-animate-hide');
         this.#fibNumDomElements[1].classList.remove('fib-num-2-slide-left');
@@ -62,6 +62,10 @@ export class FibCanvasAnimation {
             'fib-num-3-animate-show'
         );
         this.#stepNumDomElement.classList.remove('step-num-progress-forwards');
+
+        if (displayTimePeriod) {
+            await this.#waitATick(displayTimePeriod);
+        }
     }
 
     async animateBackwardsBeforeCalculation() {
@@ -78,7 +82,7 @@ export class FibCanvasAnimation {
         await this.#animateFibNum1SlideRight();
     }
 
-    async animateBackwardsAfterCalculation() {
+    async animateBackwardsAfterCalculation(displayTimePeriod = 0) {
         this.#fibNumDomElements[1].classList.remove(
             'fib-num-2-slide-bottom-left'
         );
@@ -109,6 +113,10 @@ export class FibCanvasAnimation {
             )
         );
         this.#stepNumDomElement.classList.remove('step-num-progress-backwards');
+
+        if (displayTimePeriod) {
+            await this.#waitATick(displayTimePeriod);
+        }
     }
 
     stopAnimation() {
@@ -207,6 +215,16 @@ export class FibCanvasAnimation {
         domElement.classList.add(animationClass);
 
         return animation;
+    }
+
+    #waitATick(timeout = 0) {
+        if (this.#animationStopped) {
+            return Promise.resolve();
+        }
+
+        return new Promise((resolve) => {
+            setTimeout(resolve, timeout);
+        });
     }
 
     #getFibNum3OffsetPath(fibNum3DomElement) {

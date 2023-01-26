@@ -60,6 +60,7 @@ button:disabled {
     outline: 2px dashed #6a9d27;
     background-color: #74af27;
     text-shadow: 2px 2px 3px rgb(22 22 23 / 11%);
+    transition: background-color 0.1s;
 }
 
 .btn-radio-active {
@@ -74,6 +75,10 @@ button:disabled {
     border-top-right-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     rotate: 2deg;
+}
+
+.btn-radio:nth-child(2) {
+    width: 110px;
 }
 
 .btn-radio:nth-child(4) {

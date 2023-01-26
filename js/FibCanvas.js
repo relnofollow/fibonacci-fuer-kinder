@@ -51,7 +51,7 @@ export class FibCanvas {
         await this.stop();
         await this.#waitATick();
 
-        this.#nextNumber();
+        await this.#nextNumber();
     }
 
     async stepBackward() {
@@ -62,7 +62,7 @@ export class FibCanvas {
         await this.stop();
         await this.#waitATick();
 
-        this.#prevNumber();
+        await this.#prevNumber();
     }
 
     async playForward() {
@@ -167,11 +167,9 @@ export class FibCanvas {
 
         this.#setNextFibNumbers();
 
-        await this.#fibCanvasAnimation.animateAfterCalculation();
-
-        if (displayTimePeriod) {
-            await this.#waitATick(displayTimePeriod);
-        }
+        await this.#fibCanvasAnimation.animateAfterCalculation(
+            displayTimePeriod
+        );
 
         this.#setAnimationInProgress(false);
     }
@@ -183,13 +181,11 @@ export class FibCanvas {
 
         this.#setPrevFibNumbers();
 
-        await this.#fibCanvasAnimation.animateBackwardsAfterCalculation();
+        await this.#fibCanvasAnimation.animateBackwardsAfterCalculation(
+            displayTimePeriod
+        );
 
         this.#setPrevStepNumber();
-
-        if (displayTimePeriod) {
-            await this.#waitATick(displayTimePeriod);
-        }
 
         this.#setAnimationInProgress(false);
     }

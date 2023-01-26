@@ -35,13 +35,21 @@ export class FibApp {
 
     #bindDomEventsListeners() {
         this.#btnNext.addEventListener('click', async () => {
+            this.#setActiveRadioButton(this.#btnNext);
+
             await this.#fibCanvas.stop();
-            this.#fibCanvas.stepForward();
+            await this.#fibCanvas.stepForward();
+
+            this.#removeBtnRadioActiveClass();
         });
 
         this.#btnPrev.addEventListener('click', async () => {
+            this.#setActiveRadioButton(this.#btnPrev);
+
             await this.#fibCanvas.stop();
-            this.#fibCanvas.stepBackward();
+            await this.#fibCanvas.stepBackward();
+
+            this.#removeBtnRadioActiveClass();
         });
 
         this.#btnReset.addEventListener('click', async () => {
@@ -50,16 +58,12 @@ export class FibApp {
         });
 
         this.#btnPlayForwards.addEventListener('click', async () => {
-            this.#removeBtnRadioActiveClass();
-            this.#btnPlayForwards.classList.add('btn-radio-active');
-
+            this.#setActiveRadioButton(this.#btnPlayForwards);
             this.#fibCanvas.playForward();
         });
 
         this.#btnPlayBackwards.addEventListener('click', async () => {
-            this.#removeBtnRadioActiveClass();
-            this.#btnPlayBackwards.classList.add('btn-radio-active');
-
+            this.#setActiveRadioButton(this.#btnPlayBackwards);
             this.#fibCanvas.playBackward();
         });
 
@@ -94,6 +98,11 @@ export class FibApp {
         this.#fibCanvas.autoPlayStoppedAtFirstNumber$.subscribe(() => {
             this.#removeBtnRadioActiveClass();
         });
+    }
+
+    #setActiveRadioButton(btnDomElement) {
+        this.#removeBtnRadioActiveClass();
+        btnDomElement.classList.add('btn-radio-active');
     }
 
     #removeBtnRadioActiveClass() {
