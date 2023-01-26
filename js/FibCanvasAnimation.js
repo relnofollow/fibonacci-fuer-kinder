@@ -5,6 +5,8 @@ export class FibCanvasAnimation {
     #arrow2DomElement;
     #stepNumDomElement;
 
+    #animationStopped = false;
+
     constructor(
         fibNumDomElements,
         plusSignDomElement,
@@ -21,6 +23,7 @@ export class FibCanvasAnimation {
 
     async animateBeforeCalculation() {
         this.#animateStepNumProgressForwards();
+
         await this.#animateHideElements();
         await this.#animateFibNum2SlideLeft();
         await this.#animateFibNum3SlideTopRight();
@@ -63,6 +66,7 @@ export class FibCanvasAnimation {
 
     async animateBackwardsBeforeCalculation() {
         this.#animateStepNumProgressBackwards();
+
         await this.#animateHide(this.#fibNumDomElements[2]);
         await Promise.all([
             this.#animateHide(this.#arrow1DomElement),
@@ -107,7 +111,13 @@ export class FibCanvasAnimation {
         this.#stepNumDomElement.classList.remove('step-num-progress-backwards');
     }
 
-    async stopAnimation() {}
+    stopAnimation() {
+        this.#animationStopped = true;
+    }
+
+    startAnimation() {
+        this.#animationStopped = false;
+    }
 
     #animateHideElements() {
         return Promise.all([
@@ -183,6 +193,11 @@ export class FibCanvasAnimation {
     }
 
     #applyAnimation(domElement, animationClass) {
+        // Do not apply animation if animation was stopped
+        if (this.#animationStopped) {
+            return Promise.resolve();
+        }
+
         const animation = new Promise((resolve) => {
             domElement.addEventListener('animationend', resolve, {
                 once: true,

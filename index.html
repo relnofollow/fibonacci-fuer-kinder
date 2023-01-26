@@ -4,13 +4,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Fibonacci für Kinder</title>
-        <link rel="stylesheet" href="css/normalize.css" />
-        <link rel="stylesheet" href="css/style.css" />
+        <link href="css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link
             href="https://fonts.googleapis.com/css2?family=McLaren"
             rel="stylesheet"
             type="text/css"
         />
+        <link href="css/fontawesome.css" rel="stylesheet" type="text/css" />
+        <link href="css/solid.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <main>
@@ -42,60 +44,62 @@
                 </div>
 
                 <div class="panel-actions">
-                    <div class="panel-stop fib-display-none">
-                        <button
-                            type="button"
-                            class="btn-dashed btn-stop fib-stop"
-                        >
-                            Stop
-                        </button>
-                    </div>
-                    <div class="panel-step-btns">
-                        <button type="button" class="btn-dashed fib-reset">
-                            Zum Anfang
-                        </button>
-                        <button type="button" class="btn-red fib-prev">
-                            Zurück
-                        </button>
-                        <button type="button" class="btn-red fib-next">
-                            Weiter
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        class="btn-dashed btn-reset fib-reset"
+                        title="Zum Anfang"
+                    >
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
                     <div class="panel-radio-btns">
                         <div class="radio-btns">
                             <button
                                 type="button"
-                                class="btn-dashed btn-radio btn-back-extra"
-                                title="Zurück am schnellsten!"
+                                class="btn-dashed btn-radio fib-backwards"
+                                title="Auto zurück"
                             >
-                                «
+                                <i class="fa-solid fa-backward"></i>
                             </button>
                             <button
                                 type="button"
-                                class="btn-dashed btn-radio fib-backwards"
-                                title="Zurück schneller!"
+                                class="btn-dashed btn-radio fib-prev"
+                                title="Ein Schritt zurück"
                             >
-                                ‹
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+                            <button
+                                type="button"
+                                class="btn-dashed btn-radio btn-stop fib-stop"
+                                title="Stop"
+                            >
+                                <i class="fa-solid fa-stop"></i>
+                            </button>
+                            <button
+                                type="button"
+                                class="btn-dashed btn-radio fib-next"
+                                title="Ein Schritt weiter"
+                            >
+                                <i class="fa-solid fa-angle-right"></i>
                             </button>
                             <button
                                 type="button"
                                 class="btn-dashed btn-radio fib-forwards"
-                                title="Weiter schneller!"
+                                title="Auto weiter"
                             >
-                                ›
-                            </button>
-                            <button
-                                type="button"
-                                class="btn-dashed btn-radio btn-ff-extra"
-                                title="Weiter am schnellsten!"
-                            >
-                                »
+                                <i class="fa-solid fa-forward"></i>
                             </button>
                         </div>
                     </div>
                 </div>
+
+                <div class="panel-speed">
+                    <button type="button" class="btn-outlined">x 1</button>
+                    <button type="button" class="btn-outlined">x 3</button>
+                    <button type="button" class="btn-outlined">x 10</button>
+                </div>
             </div>
         </main>
+        <script src="node_modules/rxjs/dist/bundles/rxjs.umd.min.js"></script>
         <script src="js/index.js" type="module"></script>
     </body>
 </html>

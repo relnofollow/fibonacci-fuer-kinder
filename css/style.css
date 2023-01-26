@@ -292,11 +292,25 @@ h1 {
     font-size: 4rem;
 }
 
-.panel-actions {
-    transition: opacity 0.25s;
+.panel-speed {
     display: flex;
-    flex-direction: column;
+}
+
+.panel-speed > *:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+.panel-actions {
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.panel-actions .btn-reset {
+    position: absolute;
+    right: calc(100% + 1rem);
 }
 
 .fib-num,
@@ -313,12 +327,4 @@ h1 {
 
 .radio-btns > *:not(:last-child) {
     margin-right: 0.5rem;
-}
-
-.panel-radio-btns {
-    margin-top: 2rem;
-}
-
-.panel-stop {
-    position: absolute;
 }

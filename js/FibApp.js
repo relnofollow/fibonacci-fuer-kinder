@@ -3,6 +3,8 @@ import { FibCanvas } from './FibCanvas.js';
 export class FibApp {
     #fibCanvas;
 
+    #btnStop;
+
     constructor() {}
 
     start() {
@@ -18,38 +20,62 @@ export class FibApp {
         const btnPlayBackwards = document.querySelector('.fib-backwards');
         const btnStop = document.querySelector('.fib-stop');
 
-        btnNext.addEventListener('click', () => {
-            this.#blockActionPanelWhileInProgress(this.#fibCanvas.nextNumber());
+        this.#btnStop = btnStop;
+
+        btnNext.addEventListener('click', async () => {
+            await this.#fibCanvas.stop();
+
+            btnStop.disabled = false;
+
+            this.#fibCanvas.nextNumber();
         });
 
-        btnPrev.addEventListener('click', () => {
-            this.#blockActionPanelWhileInProgress(this.#fibCanvas.prevNumber());
+        btnPrev.addEventListener('click', async () => {
+            await this.#fibCanvas.stop();
+
+            btnStop.disabled = false;
+
+            this.#fibCanvas.prevNumber();
         });
 
-        btnReset.addEventListener('click', () => {
+        btnReset.addEventListener('click', async () => {
+            await this.#fibCanvas.stop();
+
+            btnStop.disabled = true;
+
             this.#fibCanvas.resetToStart();
         });
 
-        btnPlayForwards.addEventListener('click', () => {
+        btnPlayForwards.addEventListener('click', async () => {
             this.#removeBtnRadioActiveClass();
             btnPlayForwards.classList.add('btn-radio-active');
-            this.#blockActionPanelWhileInProgress(
-                this.#fibCanvas.playForwards(),
-                /*blockOnlyStepsPanel=*/ true
+
+            await this.#fibCanvas.stop();
+
+            btnStop.disabled = false;
+
+            this.#blockStepButtonsWhileInProgress(
+                this.#fibCanvas.playForwards()
             );
         });
 
-        btnPlayBackwards.addEventListener('click', () => {
+        btnPlayBackwards.addEventListener('click', async () => {
             this.#removeBtnRadioActiveClass();
             btnPlayBackwards.classList.add('btn-radio-active');
-            this.#blockActionPanelWhileInProgress(
-                this.#fibCanvas.playBackwards(),
-                /*blockOnlyStepsPanel=*/ true
+
+            await this.#fibCanvas.stop();
+
+            btnStop.disabled = false;
+
+            this.#blockStepButtonsWhileInProgress(
+                this.#fibCanvas.playBackwards()
             );
         });
 
-        btnStop.addEventListener('click', () => {
-            this.#fibCanvas.stopAnimation();
+        btnStop.addEventListener('click', async () => {
+            btnStop.disabled = true;
+            await this.#fibCanvas.stop();
+            this.#removeBtnRadioActiveClass();
         });
     }
 
@@ -59,23 +85,14 @@ export class FibApp {
             .forEach((el) => el.classList.remove('btn-radio-active'));
     }
 
-    #blockActionPanelWhileInProgress(promise, blockOnlyStepsPanel = false) {
-        const btnStop = document.querySelector('.panel-stop');
-        const actionPanelDomElements = document.querySelectorAll(
-            '.panel-step-btns' +
-                (blockOnlyStepsPanel ? '' : ', .panel-radio-btns')
-        );
+    #blockStepButtonsWhileInProgress(promise) {
+        const btnSteps = document.querySelectorAll('.fib-prev, .fib-next');
 
-        actionPanelDomElements.forEach((el) => el.classList.add('fib-hidden'));
-        btnStop.classList.remove('fib-display-none');
+        btnSteps.forEach((el) => (el.disabled = true));
 
         promise.then(() => {
-            actionPanelDomElements.forEach((el) =>
-                el.classList.remove('fib-hidden')
-            );
-            btnStop.classList.add('fib-display-none');
-
-            this.#removeBtnRadioActiveClass();
+            btnSteps.forEach((el) => (el.disabled = false));
+            this.#btnStop.disabled = true;
         });
     }
 }

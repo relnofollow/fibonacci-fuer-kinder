@@ -12,5 +12,8 @@
     "devDependencies": {
         "http-server": "^14.1.1",
         "prettier": "2.8.3"
+    },
+    "dependencies": {
+        "rxjs": "^7.8.0"
     }
 }

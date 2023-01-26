@@ -14,6 +14,11 @@ button:hover {
     opacity: 0.8;
 }
 
+button:disabled {
+    pointer-events: none;
+    opacity: 0.45;
+}
+
 .btn-dashed {
     background-color: #4e87a0;
     outline: 2px dashed #397691;
@@ -22,8 +27,28 @@ button:hover {
     border-radius: 1.4rem;
 }
 
+.btn-outlined {
+    background-color: #a7ebf6;
+    color: #4e87a0;
+    outline: 2px dotted #71c1e4;
+    outline-offset: -4px;
+    width: 83px;
+    height: 40px;
+    border-radius: 2rem;
+}
+
+.btn-outlined:hover,
+.btn-outlined-active {
+    color: #ea6b6e;
+}
+
 .btn-red {
     background: url(../images/bg_red-btn.png) no-repeat;
+}
+
+.btn-reset {
+    width: 60px;
+    height: 59px;
 }
 
 .btn-radio {
@@ -48,7 +73,7 @@ button:hover {
     rotate: 2deg;
 }
 
-.btn-radio:nth-child(3) {
+.btn-radio:nth-child(4) {
     rotate: -3deg;
 }
 

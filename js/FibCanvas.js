@@ -14,6 +14,8 @@ export class FibCanvas {
     #fibNumbers = [];
     #numberFormatter = new Intl.NumberFormat('de-DE', {});
 
+    $stepComplete = new rxjs.Subject();
+
     constructor() {
         this.#initDomElements();
         this.#initNumbers();
@@ -28,10 +30,13 @@ export class FibCanvas {
         this.#setNextFibNumbers();
 
         await this.#fibCanvasAnimation.animateAfterCalculation();
+
+        this.$stepComplete.next(true);
     }
 
     async prevNumber() {
         if (this.#stepNumber === 1) {
+            this.$stepComplete.next(true);
             return;
         }
 
@@ -42,30 +47,43 @@ export class FibCanvas {
         await this.#fibCanvasAnimation.animateBackwardsAfterCalculation();
 
         this.#setPrevStepNumber();
+
+        this.$stepComplete.next(true);
     }
 
-    async playForwards() {
+    async playForwards(speed = 1) {
         this.autoplay = true;
 
         while (this.autoplay) {
             await this.nextNumber();
-            await this.#tick();
+            await this.#tick(); // Make a pause to reset step progress animation between iterations
         }
     }
 
-    async playBackwards() {
+    async playBackwards(speed = 1) {
         this.autoplay = true;
 
         while (this.autoplay && this.#stepNumber > 1) {
             await this.prevNumber();
-            await this.#tick();
+            await this.#tick(); // Make a pause to reset step progress animation between iterations
         }
     }
 
     // TODO: stop animation immediately
-    async stopAnimation() {
+    async stop() {
+        if (!this.autoplay) {
+            return Promise.resolve();
+        }
+
         this.autoplay = false;
-        await this.#fibCanvasAnimation.stopAnimation();
+
+        this.#fibCanvasAnimation.stopAnimation();
+
+        const $stepComplete = this.$stepComplete.pipe(
+            rxjs.tap(() => this.#fibCanvasAnimation.startAnimation())
+        );
+
+        await rxjs.firstValueFrom($stepComplete);
     }
 
     resetToStart() {
