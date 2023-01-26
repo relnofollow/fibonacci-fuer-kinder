@@ -1,4 +1,5 @@
 @import url(buttons.css);
+@import url(animation.css);
 
 * {
     box-sizing: border-box;
@@ -63,41 +64,6 @@ h1 {
     position: relative;
 }
 
-.step-num-progress-forwards,
-.step-num-progress-backwards {
-    background-image: linear-gradient(#f5e2d6, #f5e2d6);
-    background-position: 0% 0;
-    background-repeat: no-repeat;
-}
-
-.step-num-progress-forwards {
-    animation: 3s background-size-increase linear forwards;
-    background-size: 0% auto;
-}
-
-.step-num-progress-backwards {
-    animation: 3s background-size-reduce linear forwards;
-    background-size: 100% auto;
-}
-
-@keyframes background-size-reduce {
-    from {
-        background-size: 100% auto;
-    }
-    to {
-        background-size: 0% auto;
-    }
-}
-
-@keyframes background-size-increase {
-    from {
-        background-size: 0% auto;
-    }
-    to {
-        background-size: 100% auto;
-    }
-}
-
 .step-num-value {
     font-size: 22px;
 }
@@ -148,42 +114,6 @@ h1 {
     grid-area: sum;
 }
 
-.fib-num-2-slide-left {
-    animation: 0.5s ease fib-num-2-slide-left forwards;
-}
-
-.fib-num-1-slide-right {
-    animation: 0.5s ease fib-num-1-slide-right forwards;
-}
-
-.fib-num-3-slide-top-right {
-    transform-origin: left bottom;
-    offset-path: path(var(--fib-num-3-offset-path));
-    offset-rotate: 0deg;
-
-    animation: 0.5s fib-num-3-slide-top-right forwards;
-}
-
-.fib-num-2-slide-bottom-left {
-    transform-origin: center top;
-    offset-path: path(var(--fib-num-2-offset-path));
-    offset-rotate: 0deg;
-
-    animation: 0.5s fib-num-2-slide-bottom-left forwards;
-}
-
-.fib-num-3-animate-show {
-    animation: 0.5s ease fib-num-3-animate-show forwards;
-}
-
-.fib-animate-hide {
-    animation: 0.5s ease fib-hide forwards;
-}
-
-.fib-animate-show {
-    animation: 0.5s ease fib-show forwards;
-}
-
 .fib-arrow-left,
 .fib-arrow-right {
     width: 75px;
@@ -198,84 +128,6 @@ h1 {
 .fib-arrow-right {
     transform: scaleX(-1);
     left: calc(100% + 10px);
-}
-
-@keyframes fib-num-2-slide-left {
-    from {
-    }
-    to {
-        transform: translateX(calc(-128px - 100%));
-    }
-}
-
-@keyframes fib-num-1-slide-right {
-    from {
-    }
-    to {
-        transform: translateX(calc(128px + 100%));
-    }
-}
-
-@keyframes fib-num-3-slide-top-right {
-    from {
-        offset-distance: 0%;
-    }
-    50% {
-        /* font-size: 10rem; */
-        transform: scale(1);
-    }
-    to {
-        transform: scale(0.8025);
-        offset-distance: 100%;
-    }
-}
-
-@keyframes fib-num-2-slide-bottom-left {
-    from {
-        offset-distance: 0%;
-    }
-    50% {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.236);
-        offset-distance: 100%;
-    }
-}
-
-@keyframes fib-hide {
-    from {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes fib-show {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fib-num-3-animate-show {
-    from {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 
 .fib-hidden {
