@@ -127,6 +127,13 @@ export class FibCanvasAnimation {
         this.#animationStopped = false;
     }
 
+    setAnimationSpeed(animationSpeedInMs) {
+        document.documentElement.style.setProperty(
+            '--fib-animation-speed',
+            `${(animationSpeedInMs / 1000).toFixed(2)}s`
+        );
+    }
+
     #animateHideElements() {
         return Promise.all([
             this.#animateHide(this.#fibNumDomElements[0]),

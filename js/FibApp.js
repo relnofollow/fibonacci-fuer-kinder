@@ -40,7 +40,7 @@ export class FibApp {
             await this.#fibCanvas.stop();
             await this.#fibCanvas.stepForward();
 
-            this.#removeBtnRadioActiveClass();
+            this.#removeBtnRadioActiveClass(this.#btnNext);
         });
 
         this.#btnPrev.addEventListener('click', async () => {
@@ -49,11 +49,11 @@ export class FibApp {
             await this.#fibCanvas.stop();
             await this.#fibCanvas.stepBackward();
 
-            this.#removeBtnRadioActiveClass();
+            this.#removeBtnRadioActiveClassForAllButtons(this.#btnPrev);
         });
 
         this.#btnReset.addEventListener('click', async () => {
-            this.#removeBtnRadioActiveClass();
+            this.#removeBtnRadioActiveClassForAllButtons();
             this.#fibCanvas.resetToStart();
         });
 
@@ -69,7 +69,7 @@ export class FibApp {
 
         this.#btnStop.addEventListener('click', () => {
             this.#fibCanvas.stop();
-            this.#removeBtnRadioActiveClass();
+            this.#removeBtnRadioActiveClassForAllButtons();
         });
 
         this.#btnsSpeed.forEach((el, i) => {
@@ -96,18 +96,22 @@ export class FibApp {
         });
 
         this.#fibCanvas.autoPlayStoppedAtFirstNumber$.subscribe(() => {
-            this.#removeBtnRadioActiveClass();
+            this.#removeBtnRadioActiveClassForAllButtons();
         });
     }
 
     #setActiveRadioButton(btnDomElement) {
-        this.#removeBtnRadioActiveClass();
+        this.#removeBtnRadioActiveClassForAllButtons();
         btnDomElement.classList.add('btn-radio-active');
     }
 
-    #removeBtnRadioActiveClass() {
+    #removeBtnRadioActiveClassForAllButtons() {
         document
             .querySelectorAll('.btn-radio')
             .forEach((el) => el.classList.remove('btn-radio-active'));
+    }
+
+    #removeBtnRadioActiveClass(domElement) {
+        domElement.classList.remove('btn-radio-active');
     }
 }
