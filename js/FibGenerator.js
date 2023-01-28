@@ -5,7 +5,7 @@ export class FibGenerator {
 
     next() {
         if (!this.#numbers) {
-            this.#numbers = [0, 1, 1];
+            this.#numbers = [0n, 1n, 1n];
             return this.#numbers;
         }
 
