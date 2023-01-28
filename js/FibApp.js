@@ -41,6 +41,8 @@ export class FibApp {
             await this.#fibCanvas.stepForward();
 
             this.#removeBtnRadioActiveClass(this.#btnNext);
+
+            this.#blurActiveElement();
         });
 
         this.#btnPrev.addEventListener('click', async () => {
@@ -50,26 +52,36 @@ export class FibApp {
             await this.#fibCanvas.stepBackward();
 
             this.#removeBtnRadioActiveClassForAllButtons(this.#btnPrev);
+
+            this.#blurActiveElement();
         });
 
         this.#btnReset.addEventListener('click', async () => {
             this.#removeBtnRadioActiveClassForAllButtons();
             this.#fibCanvas.resetToStart();
+
+            this.#blurActiveElement();
         });
 
         this.#btnPlayForwards.addEventListener('click', async () => {
             this.#setActiveRadioButton(this.#btnPlayForwards);
             this.#fibCanvas.playForward();
+
+            this.#blurActiveElement();
         });
 
         this.#btnPlayBackwards.addEventListener('click', async () => {
             this.#setActiveRadioButton(this.#btnPlayBackwards);
             this.#fibCanvas.playBackward();
+
+            this.#blurActiveElement();
         });
 
         this.#btnStop.addEventListener('click', () => {
             this.#fibCanvas.stop();
             this.#removeBtnRadioActiveClassForAllButtons();
+
+            this.#blurActiveElement();
         });
 
         this.#btnsSpeed.forEach((el, i) => {
@@ -82,6 +94,21 @@ export class FibApp {
                 this.#fibCanvas.setAnimationSpeedDivider(SPEED_PRESETS[i]);
             });
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                var clickEvent = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                });
+                this.#btnStop.dispatchEvent(clickEvent);
+            }
+        });
+    }
+
+    #blurActiveElement() {
+        document.activeElement.blur();
     }
 
     #subscribeToObservables() {
