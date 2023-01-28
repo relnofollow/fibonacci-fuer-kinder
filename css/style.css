@@ -5,14 +5,33 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     background-color: #85d8e5;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
     min-width: 300px;
     width: 90vw;
     margin: 0 auto;
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+    padding: 1rem;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1,
@@ -23,6 +42,21 @@ h3 {
 
 h1 {
     text-align: center;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer a {
+    color: #4e87a0;
+    font-family: 'Arvo', serif;
+    font-size: 12px;
 }
 
 .text-white {
