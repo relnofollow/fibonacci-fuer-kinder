@@ -27,10 +27,9 @@ main {
 footer {
     flex-shrink: 0;
     padding: 1rem;
-}
 
-footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -257,4 +256,9 @@ footer a {
 
 .no-wrap {
     white-space: nowrap;
+}
+
+.link-github {
+    font-size: 26px;
+    margin-bottom: 0.4rem;
 }
