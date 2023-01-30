@@ -1,5 +1,6 @@
 @import url(buttons.css);
 @import url(animation.css);
+@import url(modal.css);
 
 * {
     box-sizing: border-box;
@@ -116,7 +117,6 @@ footer a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 22px;
 }
 
 .fib-num {
@@ -233,6 +233,8 @@ footer a {
     outline-offset: 16px;
     background-color: #a7ebf6;
     border-radius: 2rem;
+
+    margin-bottom: 3.5rem;
 }
 
 .panel-auto-title {
@@ -247,4 +249,12 @@ footer a {
     left: 12px;
     transform: translateY(-50%);
     padding: 0 0.5rem;
+}
+
+.panel-info {
+    margin-bottom: 2rem;
+}
+
+.no-wrap {
+    white-space: nowrap;
 }

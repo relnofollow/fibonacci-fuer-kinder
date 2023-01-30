@@ -1,9 +1,11 @@
 import { FibCanvas } from './FibCanvas.js';
+import { FibModal } from './FibModal.js';
 
 const SPEED_PRESETS = [1, 2, 3, 10, 50];
 
 export class FibApp {
     #fibCanvas;
+    #fibModal;
 
     #btnNext;
     #btnReset;
@@ -11,12 +13,15 @@ export class FibApp {
     #btnPlayForwards;
     #btnPlayBackwards;
     #btnStop;
+    #btnInfo;
     #btnsSpeed;
 
     constructor() {}
 
     start() {
         this.#fibCanvas = new FibCanvas();
+        this.#fibModal = new FibModal();
+
         this.#initDomElements();
         this.#bindDomEventsListeners();
         this.#subscribeToObservables();
@@ -29,6 +34,7 @@ export class FibApp {
         this.#btnPlayForwards = document.querySelector('.fib-forwards');
         this.#btnPlayBackwards = document.querySelector('.fib-backwards');
         this.#btnStop = document.querySelector('.fib-stop');
+        this.#btnInfo = document.querySelector('.fib-info');
 
         this.#btnsSpeed = document.querySelectorAll('.fib-speed');
     }
@@ -104,6 +110,10 @@ export class FibApp {
                     activeAutoPlayBtn.focus();
                 }
             });
+        });
+
+        this.#btnInfo.addEventListener('click', () => {
+            this.#fibModal.show();
         });
     }
 
