@@ -18,6 +18,10 @@ button:disabled {
     cursor: default;
 }
 
+button:focus-visible {
+    box-shadow: 0px 0px 0px 3px #fff;
+}
+
 .btn-dashed {
     background-color: #4e87a0;
     outline: 2px dashed #397691;
@@ -81,4 +85,8 @@ button:disabled {
 .btn-auto-stop {
     outline: 2px dashed #e95558;
     background-color: #ff6b6f;
+}
+
+.btn-radio-paused i::before {
+    content: '\f04c';
 }

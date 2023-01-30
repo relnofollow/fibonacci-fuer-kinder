@@ -41,8 +41,6 @@ export class FibApp {
             await this.#fibCanvas.stepForward();
 
             this.#removeBtnRadioActiveClass(this.#btnNext);
-
-            this.#blurActiveElement();
         });
 
         this.#btnPrev.addEventListener('click', async () => {
@@ -52,36 +50,44 @@ export class FibApp {
             await this.#fibCanvas.stepBackward();
 
             this.#removeBtnRadioActiveClassForAllButtons(this.#btnPrev);
-
-            this.#blurActiveElement();
         });
 
         this.#btnReset.addEventListener('click', async () => {
             this.#removeBtnRadioActiveClassForAllButtons();
             this.#fibCanvas.resetToStart();
-
-            this.#blurActiveElement();
         });
 
         this.#btnPlayForwards.addEventListener('click', async () => {
-            this.#setActiveRadioButton(this.#btnPlayForwards);
-            this.#fibCanvas.playForward();
-
-            this.#blurActiveElement();
+            if (
+                !this.#isButtonActive(this.#btnPlayForwards) ||
+                this.#isButtonPaused(this.#btnPlayForwards)
+            ) {
+                this.#setActiveRadioButton(this.#btnPlayForwards);
+                this.#fibCanvas.playForward();
+            } else {
+                this.#autoPlayPause(this.#btnPlayForwards);
+            }
         });
 
         this.#btnPlayBackwards.addEventListener('click', async () => {
-            this.#setActiveRadioButton(this.#btnPlayBackwards);
-            this.#fibCanvas.playBackward();
+            if (this.#fibCanvas.isFirstStep) {
+                return;
+            }
 
-            this.#blurActiveElement();
+            if (
+                !this.#isButtonActive(this.#btnPlayBackwards) ||
+                this.#isButtonPaused(this.#btnPlayBackwards)
+            ) {
+                this.#setActiveRadioButton(this.#btnPlayBackwards);
+                this.#fibCanvas.playBackward();
+            } else {
+                this.#autoPlayPause(this.#btnPlayBackwards);
+            }
         });
 
         this.#btnStop.addEventListener('click', () => {
             this.#fibCanvas.stop();
             this.#removeBtnRadioActiveClassForAllButtons();
-
-            this.#blurActiveElement();
         });
 
         this.#btnsSpeed.forEach((el, i) => {
@@ -92,23 +98,13 @@ export class FibApp {
                 el.classList.add('btn-outline-active');
 
                 this.#fibCanvas.setAnimationSpeedDivider(SPEED_PRESETS[i]);
+
+                const activeAutoPlayBtn = this.#getActiveAutoPlayBtn();
+                if (activeAutoPlayBtn) {
+                    activeAutoPlayBtn.focus();
+                }
             });
         });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                var clickEvent = new MouseEvent('click', {
-                    view: window,
-                    bubbles: true,
-                    cancelable: true,
-                });
-                this.#btnStop.dispatchEvent(clickEvent);
-            }
-        });
-    }
-
-    #blurActiveElement() {
-        document.activeElement.blur();
     }
 
     #subscribeToObservables() {
@@ -130,15 +126,33 @@ export class FibApp {
     #setActiveRadioButton(btnDomElement) {
         this.#removeBtnRadioActiveClassForAllButtons();
         btnDomElement.classList.add('btn-radio-active');
+        btnDomElement.classList.remove('btn-radio-paused');
     }
 
     #removeBtnRadioActiveClassForAllButtons() {
         document
             .querySelectorAll('.btn-radio')
-            .forEach((el) => el.classList.remove('btn-radio-active'));
+            .forEach(this.#removeBtnRadioActiveClass);
     }
 
     #removeBtnRadioActiveClass(domElement) {
-        domElement.classList.remove('btn-radio-active');
+        domElement.classList.remove('btn-radio-active', 'btn-radio-paused');
+    }
+
+    #autoPlayPause(autoPlayBtn) {
+        autoPlayBtn.classList.add('btn-radio-paused');
+        this.#fibCanvas.stop();
+    }
+
+    #isButtonActive(buttonDomElement) {
+        return buttonDomElement.classList.contains('btn-radio-active');
+    }
+
+    #isButtonPaused(buttonDomElement) {
+        return buttonDomElement.classList.contains('btn-radio-paused');
+    }
+
+    #getActiveAutoPlayBtn() {
+        return document.querySelector('.btn-auto.btn-radio-active');
     }
 }
