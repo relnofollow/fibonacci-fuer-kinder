@@ -161,7 +161,7 @@ footer a {
 }
 
 .fib-hidden {
-    opacity: 0;
+    opacity: var(--fib-opacity-0, 0);
     pointer-events: none;
 }
 

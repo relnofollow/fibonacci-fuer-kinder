@@ -58,13 +58,13 @@
         background-size: 0% auto;
     }
     to {
-        background-size: 100% auto;
+        background-size: var(--fib-step-progress-bg-size-100, 100%) auto;
     }
 }
 
 @keyframes background-size-reduce {
     from {
-        background-size: 100% auto;
+        background-size: var(--fib-step-progress-bg-size-100, 100%) auto;
     }
     to {
         background-size: 0% auto;
@@ -116,35 +116,35 @@
 
 @keyframes fib-hide {
     from {
-        opacity: 1;
+        opacity: var(--fib-opacity-1, 1);
     }
     50% {
-        opacity: 0;
+        opacity: var(--fib-opacity-0, 0);
     }
     to {
-        opacity: 0;
+        opacity: var(--fib-opacity-0, 0);
     }
 }
 
 @keyframes fib-show {
     from {
-        opacity: 0;
+        opacity: var(--fib-opacity-0, 0);
     }
     to {
-        opacity: 1;
+        opacity: var(--fib-opacity-1, 1);
     }
 }
 
 @keyframes fib-num-3-animate-show {
     from {
-        opacity: 0;
+        opacity: var(--fib-opacity-0, 0);
     }
     50% {
-        opacity: 1;
+        opacity: var(--fib-opacity-1, 1);
         transform: scale(1.2);
     }
     to {
-        opacity: 1;
+        opacity: var(--fib-opacity-1, 1);
         transform: scale(1);
     }
 }

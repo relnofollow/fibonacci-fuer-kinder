@@ -1,3 +1,5 @@
+const MAX_ANIMATION_SPEED_FLICKERING_MS = 10;
+
 export class FibCanvasAnimation {
     #fibNumDomElements;
     #plusSignDomElement;
@@ -132,6 +134,25 @@ export class FibCanvasAnimation {
             '--fib-animation-speed',
             `${(animationSpeedInMs / 1000).toFixed(2)}s`
         );
+
+        this.#preventFlickeringAtHighSpeed(animationSpeedInMs);
+    }
+
+    #preventFlickeringAtHighSpeed(animationSpeedInMs) {
+        if (animationSpeedInMs <= MAX_ANIMATION_SPEED_FLICKERING_MS) {
+            document.documentElement.style.setProperty('--fib-opacity-0', 1);
+            document.documentElement.style.setProperty('--fib-opacity-1', 1);
+            document.documentElement.style.setProperty(
+                '--fib-step-progress-bg-size-100',
+                '0%'
+            );
+        } else {
+            document.documentElement.style.removeProperty('--fib-opacity-0');
+            document.documentElement.style.removeProperty('--fib-opacity-1');
+            document.documentElement.style.removeProperty(
+                '--fib-step-progress-bg-size-100'
+            );
+        }
     }
 
     #animateHideElements() {
