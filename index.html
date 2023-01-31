@@ -4,16 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Fibonacci für Kinder</title>
-        <link href="css/normalize.css" rel="stylesheet" type="text/css" />
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link
             href="https://fonts.googleapis.com/css2?family=McLaren&family=Arvo"
             rel="stylesheet"
             type="text/css"
         />
-        <link href="css/fontawesome.css" rel="stylesheet" type="text/css" />
-        <link href="css/brands.css" rel="stylesheet" type="text/css" />
-        <link href="css/solid.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <main>
@@ -36,11 +31,19 @@
                         <div class="fib-num-value">1</div>
                     </div>
                     <div class="fib-num-3-grid-cell">
-                        <img class="fib-arrow-left" src="./images/arrow.svg" />
+                        <img
+                            class="fib-arrow-left"
+                            src="<%= require('./images/arrow.svg') %>"
+                            alt="arrow left"
+                        />
                         <div class="fib-num fib-num-3">
                             <div class="fib-num-value">1</div>
                         </div>
-                        <img class="fib-arrow-right" src="./images/arrow.svg" />
+                        <img
+                            class="fib-arrow-right"
+                            src="<%= require('./images/arrow.svg') %>"
+                            alt="arrow right"
+                        />
                     </div>
                 </div>
 
@@ -163,14 +166,25 @@
                             </p>
                             <p>
                                 Die Fibonacci-Folge
-                                <img src="images/members.svg" /> ist durch das
-                                rekursive Bildungsgesetz
+                                <img
+                                    src="<%= require('./images/members.svg') %>"
+                                    alt="f1, f2, f3"
+                                />
+                                ist durch das rekursive Bildungsgesetz
                                 <span class="no-wrap">
-                                    <img src="images/formula.svg" /> für
-                                    <img src="images/n-definition.svg"
+                                    <img
+                                        src="<%= require('./images/formula.svg') %>"
+                                        alt="f(n) = f(n-1) + f(n-2)" />
+                                    für
+                                    <img
+                                        src="<%= require('./images/n-definition.svg') %>"
+                                        alt="n >= 3"
                                 /></span>
                                 mit den Anfangswerten
-                                <img src="images/first-members.svg" />
+                                <img
+                                    src="<%= require('./images/first-members.svg') %>"
+                                    alt="f1 = f2 = 1"
+                                />
                                 definiert.
                             </p>
                             <p>Das bedeutet in Worten:</p>
@@ -211,7 +225,5 @@
                 >
             </div>
         </footer>
-        <script src="https://unpkg.com/rxjs@7.8.0/dist/bundles/rxjs.umd.min.js"></script>
-        <script src="js/index.js" type="module"></script>
     </body>
 </html>

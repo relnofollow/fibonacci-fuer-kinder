@@ -1,5 +1,6 @@
 import { FibGenerator } from './FibGenerator.js';
 import { FibCanvasAnimation } from './FibCanvasAnimation.js';
+import { Subject, tap, firstValueFrom } from 'rxjs';
 
 const DISPLAY_TIME_PERIOD_MS = 1000;
 const ANIMATION_STEP_TIME_PERIOD_MS = 500;
@@ -21,12 +22,12 @@ export class FibCanvas {
     #animationSpeedDivider;
     #animationInProgress;
 
-    stepChanged$ = new rxjs.Subject();
-    autoPlayStarted$ = new rxjs.Subject();
-    autoPlayStopped$ = new rxjs.Subject();
-    animationStarted$ = new rxjs.Subject();
-    animationStopped$ = new rxjs.Subject();
-    autoPlayStoppedAtFirstNumber$ = new rxjs.Subject();
+    stepChanged$ = new Subject();
+    autoPlayStarted$ = new Subject();
+    autoPlayStopped$ = new Subject();
+    animationStarted$ = new Subject();
+    animationStopped$ = new Subject();
+    autoPlayStoppedAtFirstNumber$ = new Subject();
 
     constructor() {
         this.#initDomElements();
@@ -121,10 +122,10 @@ export class FibCanvas {
         this.#fibCanvasAnimation.stopAnimation();
 
         const animationStopped$ = this.animationStopped$.pipe(
-            rxjs.tap(() => this.#fibCanvasAnimation.startAnimation())
+            tap(() => this.#fibCanvasAnimation.startAnimation())
         );
 
-        await rxjs.firstValueFrom(animationStopped$);
+        await firstValueFrom(animationStopped$);
     }
 
     async resetToStart() {
@@ -152,7 +153,7 @@ export class FibCanvas {
             this.#autoPlay = false;
         }
 
-        await rxjs.firstValueFrom(this.animationStopped$);
+        await firstValueFrom(this.animationStopped$);
     }
 
     async #nextNumber(
