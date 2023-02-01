@@ -8,6 +8,7 @@ export class FibCanvasAnimation {
     #stepNumDomElement;
 
     #animationStopped = false;
+    #appliedAnimationClasses = new Map();
 
     constructor(
         fibNumDomElements,
@@ -32,14 +33,14 @@ export class FibCanvasAnimation {
     }
 
     async animateAfterCalculation(displayTimePeriod = 0) {
-        // TODO: cleanup method
-        this.#fibNumDomElements[0].classList.remove('fib-animate-hide');
-        this.#fibNumDomElements[1].classList.remove('fib-num-2-slide-left');
-        this.#fibNumDomElements[2].classList.remove(
-            'fib-num-3-slide-top-right'
+        // clean up animation classes from previous phase
+        this.#fibNumDomElements.forEach((el) =>
+            this.#removeAllAnimationClasses(el)
         );
-        this.#fibNumDomElements[2].classList.add('fib-hidden');
 
+        this.#applyAnimation(this.#fibNumDomElements[2], 'fib-hidden');
+
+        // animate plus sign and arrows
         await this.#animateShow(this.#plusSignDomElement);
         await Promise.all([
             this.#animateShow(this.#arrow1DomElement),
@@ -51,22 +52,17 @@ export class FibCanvasAnimation {
             'fib-num-3-animate-show'
         );
 
-        // clean up classes
+        // clean up animation classes
         [
             this.#plusSignDomElement,
             this.#arrow1DomElement,
             this.#arrow2DomElement,
-        ].forEach((el) =>
-            el.classList.remove('fib-animate-hide', 'fib-animate-show')
-        );
-        this.#fibNumDomElements[2].classList.remove(
-            'fib-hidden',
-            'fib-num-3-animate-show'
-        );
-        this.#stepNumDomElement.classList.remove('step-num-progress-forwards');
+            this.#fibNumDomElements[2],
+            this.#stepNumDomElement,
+        ].forEach((el) => this.#removeAllAnimationClasses(el));
 
         if (displayTimePeriod) {
-            await this.#waitATick(displayTimePeriod);
+            await this.#wait(displayTimePeriod);
         }
     }
 
@@ -85,13 +81,12 @@ export class FibCanvasAnimation {
     }
 
     async animateBackwardsAfterCalculation(displayTimePeriod = 0) {
-        this.#fibNumDomElements[1].classList.remove(
-            'fib-num-2-slide-bottom-left'
+        // clean up animation classes from previous phase
+        this.#fibNumDomElements.forEach((el) =>
+            this.#removeAllAnimationClasses(el)
         );
-        this.#fibNumDomElements[2].classList.remove('fib-animate-hide');
 
-        this.#fibNumDomElements[0].classList.remove('fib-num-1-slide-right');
-        this.#fibNumDomElements[0].classList.add('fib-hidden');
+        this.#applyAnimation(this.#fibNumDomElements[0], 'fib-hidden');
 
         await this.#animateShow(this.#fibNumDomElements[0]);
 
@@ -107,17 +102,11 @@ export class FibCanvasAnimation {
             this.#arrow1DomElement,
             this.#arrow2DomElement,
             this.#fibNumDomElements[0],
-        ].forEach((el) =>
-            el.classList.remove(
-                'fib-animate-hide',
-                'fib-animate-show',
-                'fib-hidden'
-            )
-        );
-        this.#stepNumDomElement.classList.remove('step-num-progress-backwards');
+            this.#stepNumDomElement,
+        ].forEach((el) => this.#removeAllAnimationClasses(el));
 
         if (displayTimePeriod) {
-            await this.#waitATick(displayTimePeriod);
+            await this.#wait(displayTimePeriod);
         }
     }
 
@@ -242,10 +231,31 @@ export class FibCanvasAnimation {
 
         domElement.classList.add(animationClass);
 
+        this.#storeAppliedAnimationClass(domElement, animationClass);
+
         return animation;
     }
 
-    #waitATick(timeout = 0) {
+    #storeAppliedAnimationClass(domElement, animationClass) {
+        if (!this.#appliedAnimationClasses.has(domElement)) {
+            this.#appliedAnimationClasses.set(domElement, []);
+        }
+
+        this.#appliedAnimationClasses.get(domElement).push(animationClass);
+    }
+
+    #removeAllAnimationClasses(domElement) {
+        if (!this.#appliedAnimationClasses.has(domElement)) {
+            return;
+        }
+
+        const animationClasses = this.#appliedAnimationClasses.get(domElement);
+        domElement.classList.remove(...animationClasses);
+
+        this.#appliedAnimationClasses.delete(domElement);
+    }
+
+    #wait(timeout) {
         if (this.#animationStopped) {
             return Promise.resolve();
         }
