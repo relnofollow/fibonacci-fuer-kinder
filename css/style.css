@@ -207,6 +207,13 @@ footer a {
     right: calc(100% + 2rem);
 }
 
+@media (max-width: 576px) {
+    .panel-actions .btn-reset {
+        top: -330px;
+        right: auto;
+    }
+}
+
 .panel-auto-actions {
     display: flex;
     flex-direction: row;

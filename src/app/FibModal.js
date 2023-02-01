@@ -9,10 +9,12 @@ export class FibModal {
 
     show() {
         this.#modalDomElement.style.display = 'block';
+        document.body.classList.add('modal-open');
     }
 
     hide() {
         this.#modalDomElement.style.display = 'none';
+        document.body.classList.remove('modal-open');
     }
 
     #initDomElements() {
