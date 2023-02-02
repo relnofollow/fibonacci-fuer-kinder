@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -9,6 +10,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             favicon: 'images/favicon.ico',
             template: 'index.html',
+        }),
+        new CopyPlugin({
+            patterns: [{ from: 'robots.txt' }],
         }),
     ],
     output: {
