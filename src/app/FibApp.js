@@ -15,6 +15,8 @@ export class FibApp {
     #btnStop;
     #btnInfo;
     #btnsSpeed;
+    #btnLang;
+    #menuLang;
 
     constructor() {}
 
@@ -35,6 +37,8 @@ export class FibApp {
         this.#btnPlayBackwards = document.querySelector('.fib-backwards');
         this.#btnStop = document.querySelector('.fib-stop');
         this.#btnInfo = document.querySelector('.fib-info');
+        this.#btnLang = document.querySelector('.fib-lang');
+        this.#menuLang = document.querySelector('.fib-lang-menu');
 
         this.#btnsSpeed = document.querySelectorAll('.fib-speed');
     }
@@ -115,6 +119,26 @@ export class FibApp {
         this.#btnInfo.addEventListener('click', () => {
             this.#fibModal.show();
         });
+
+        this.#btnLang.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.#toggleLangMenu();
+
+            const isMenuOpen = !this.#menuLang.classList.contains('fib-display-none');
+            if (isMenuOpen) {
+                document.addEventListener('click', this.#toggleLangMenu);
+            } else {
+                document.removeEventListener('click', this.#toggleLangMenu);
+            }
+        });
+
+        this.#menuLang.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    #toggleLangMenu = () => {
+        this.#menuLang.classList.toggle('fib-display-none');
     }
 
     #subscribeToObservables() {

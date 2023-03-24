@@ -178,7 +178,7 @@ footer a {
 }
 
 .fib-display-none {
-    display: none;
+    display: none !important;
 }
 
 .fib-sign {
@@ -281,4 +281,49 @@ footer a {
 .link-github {
     font-size: 26px;
     margin-bottom: 0.5rem;
+}
+
+.img-lang {
+    height: 20px;
+    display: block;
+}
+
+.btn-lang {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+    outline: 2px dotted #85d8e5;
+    background-color: #1aafbc;
+}
+
+.lang-menu {
+    position: absolute;
+    top: 70px;
+    right: 4px;
+
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 9px;
+}
+
+.lang-item {
+    padding: 0.5rem 1rem;
+    background-color: #a7ebf6;
+}
+
+.lang-item:first-of-type {
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+}
+
+
+.lang-item:last-of-type {
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+}
+
+.lang-item:hover {
+    background-color: #79cbd8;
 }
