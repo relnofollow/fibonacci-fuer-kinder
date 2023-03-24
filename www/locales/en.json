@@ -1,0 +1,57 @@
+{
+    "meta": {
+        "lang": "en",
+        "description": "Fibonacci number generator for children. Click on the buttons to see the next number. Playfully learn about the Fibonacci numbers.",
+        "title": "Fibonacci for kids"
+    },
+    "title": "Fibonacci Generator",
+    "subtitle": "for young mathematicians",
+    "autoplay": "Autoplay",
+    "btn-prev": {
+        "text": "Previous step",
+        "title": "One step back"
+    },
+    "btn-next": {
+        "text": "Next step",
+        "title": "One step forward"
+    },
+    "btn-reset": {
+        "title": "Reset to start"
+    },
+    "btn-backwards": {
+        "title": "Play backwards"
+    },
+    "btn-stop": {
+        "title": "Stop"
+    },
+    "btn-forwards": {
+        "title": "Play forwards"
+    },
+    "btn-speed-1": {
+        "title": "Normal speed"
+    },
+    "btn-speed-2": {
+        "title": "2X faster"
+    },
+    "btn-speed-3": {
+        "title": "3X faster"
+    },
+    "btn-speed-10": {
+        "title": "10X faster"
+    },
+    "btn-speed-50": {
+        "title": "50X faster"
+    },
+    "btn-info": {
+        "text": "What are Fibonacci numbers?"
+    },
+    "btn-close": {
+        "text": "Close"
+    },
+    "modal-info": {
+        "title": "What are Fibonacci numbers?",
+        "body": "<p>The Fibonacci sequence is a sequence in which each number is the sum of the two preceding ones. Individual numbers in the Fibonacci sequence are known as Fibonacci numbers. The sequence commonly starts from 0 and 1, although some authors start the sequence from 1 and 1 or sometimes (as did Fibonacci) from 1 and 2.</p> <p>The Fibonacci sequence <img src=\"/images/members.svg\" alt=\"f1, f2, f3\" /> is defined by the recurrence relation <span class=\"no-wrap\"> <img src=\"/images/formula.svg\" alt=\"f(n) = f(n-1) + f(n-2)\" /> for <img src=\"/images/n-definition.svg\" alt=\"n >= 3\" /></span> and for initial numbers: <img src=\"/images/first-members.svg\" alt=\"f1 = f2 = 1\" />.</p><p>That means in words:</p> <ul><li>The value 1 is specified for the first two numbers.</li><li>Each subsequent number is the sum of its two predecessors in the sequence.</li></ul><a href=\"https://en.wikipedia.org/wiki/Fibonacci_sequence\">Read more on Wikipedia</a>"
+    },
+    "step-num": "Step <span class=\"step-num-value\">1</span>",
+    "themezy-link": "Free Website Template from Themezy"
+}

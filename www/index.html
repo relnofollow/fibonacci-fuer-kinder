@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html data-attr-t lang-t="meta.lang">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" data-attr-t content-t="meta.description" />
+    <title data-t="meta.title"></title>
+    <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Lora&display=swap" rel="stylesheet"
+        type="text/css" />
+</head>
+
+<body>
+    <button type="button" class="btn-dashed btn-lang fib-lang"><img class="img-lang" data-attr-t data-attr-t-interpolate
+            src-t="/images/lang/{{meta.lang}}.svg" /></button>
+    <div class="lang-menu fib-lang-menu fib-display-none">
+        <a class="lang-item" href="/de"><img class="img-lang" src="/images/lang/de.svg" /></a>
+        <a class="lang-item" href="/"><img class="img-lang" src="/images/lang/en.svg" /></a>
+        <a class="lang-item" href="/it"><img class="img-lang" src="/images/lang/it.svg" /></a>
+        <a class="lang-item" href="/ru"><img class="img-lang" src="/images/lang/ru.svg" /></a>
+        <a class="lang-item" href="/ua"><img class="img-lang" src="/images/lang/ua.svg" /></a>
+    </div>
+
+    <main>
+        <h1 class="main-title text-white" data-t="title"></h1>
+        <p class="subtitle" data-t="subtitle"></p>
+        <div class="fib-canvas">
+            <div class="panel-step">
+                <div class="step-num" data-t="step-num"></div>
+            </div>
+            <div class="panel-numbers">
+                <div class="fib-num fib-num-1">
+                    <div class="fib-num-value">0</div>
+                </div>
+                <div class="fib-sign">+</div>
+                <div class="fib-num fib-num-2">
+                    <div class="fib-num-value">1</div>
+                </div>
+                <div class="fib-num-3-grid-cell">
+                    <img class="fib-arrow-left" src="/images/arrow.svg" alt="arrow left" />
+                    <div class="fib-num fib-num-3">
+                        <div class="fib-num-value">1</div>
+                    </div>
+                    <img class="fib-arrow-right" src="/images/arrow.svg" alt="arrow right" />
+                </div>
+            </div>
+
+            <div class="panel-actions">
+                <button type="button" class="btn-dashed btn-reset fib-reset" data-attr-t title-t="btn-reset.title">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+                <div class="panel-step-btns">
+                    <button type="button" class="btn-dashed btn-step btn-radio fib-prev" data-attr-t
+                        title-t="btn-prev.title">
+                        <i class="fa-solid fa-angle-left"></i>
+                        <span data-t="btn-prev.text"></span>
+                    </button>
+                    <button type="button" class="btn-dashed btn-step btn-radio fib-next" data-attr-t
+                        title-t="btn-next.title">
+                        <span data-t="btn-next.text"></span>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-auto">
+                <div class="panel-auto-title" data-t="autoplay"></div>
+
+                <div class="panel-auto-actions">
+                    <button type="button" class="btn-dashed btn-auto btn-radio fib-backwards" data-attr-t
+                        title-t="btn-backwards.title">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button type="button" class="btn-dashed btn-auto btn-auto-stop btn-radio fib-stop" data-attr-t
+                        title-t="btn-stop.title">
+                        <i class="fa-solid fa-stop"></i>
+                    </button>
+                    <button type="button" class="btn-dashed btn-auto btn-radio fib-forwards" data-attr-t
+                        title-t="btn-forwards.title">
+                        <i class=" fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+                <div class="panel-speed">
+                    <button type="button" class="btn-outline fib-speed btn-outline-active" data-attr-t
+                        title-t="btn-speed-1.title">
+                        x 1
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" data-attr-t title-t="btn-speed-2.title">
+                        x 2
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" data-attr-t title-t="btn-speed-3.title">
+                        x 3
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" data-attr-t title-t="btn-speed-10.title">
+                        x 10
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" data-attr-t title-t="btn-speed-50.title">
+                        x 50
+                    </button>
+                </div>
+            </div>
+            <div class="panel-info">
+                <button class="btn-info btn-dashed fib-info">
+                    <i class="fa-solid fa-book"></i>
+                    <span data-t="btn-info.text"></span>
+                </button>
+            </div>
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="btn-close fib-close"><i class="fa-solid fa-circle-xmark"></i></span>
+                        <h2 class="modal-header-title" data-t="modal-info.title">
+                        </h2>
+                    </div>
+                    <div class="modal-body" data-t="modal-info.body"></div>
+                    <div class="modal-footer">
+                        <button class="btn-dashed fib-close" type="button" data-t="btn-close.text">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <a rel="nofollow" href="http://www.themezy.com/" data-t="themezy-link"></a>
+        </div>
+    </footer>
+</body>
+
+</html>

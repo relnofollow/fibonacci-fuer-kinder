@@ -16,7 +16,7 @@ export class FibCanvas {
     #fibGenerator;
     #stepNumber;
     #fibNumbers = [];
-    #numberFormatter = new Intl.NumberFormat('de-DE', {});
+    #numberFormatter = new Intl.NumberFormat(document.documentElement.lang, {});
 
     #autoPlay;
     #animationSpeedDivider;
@@ -285,7 +285,7 @@ export class FibCanvas {
     #renderStepNumber() {
         this.#fibStepNumDomElement.querySelector(
             '.step-num-value'
-        ).innerHTML = `${this.#formatNumber(this.#stepNumber)}.`;
+        ).innerHTML = `${this.#formatNumber(this.#stepNumber)}`;
     }
 
     #formatNumber(num) {

@@ -2,17 +2,32 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const i18nHtmlWebpackPlugins = [new HtmlWebpackPlugin({
+    favicon: 'images/favicon.ico',
+    template: 'i18n/index.html',
+})];
+
+const LOCALES = ['de'];
+
+for (let locale of LOCALES) {
+    i18nHtmlWebpackPlugins.push(new HtmlWebpackPlugin({
+        favicon: 'images/favicon.ico',
+        template: `i18n/${locale}/index.html`,
+        filename: `${locale}/index.html`
+    }))
+}
+
 module.exports = {
     entry: {
         main: './src/index.js',
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            favicon: 'images/favicon.ico',
-            template: 'index.html',
-        }),
+        ...i18nHtmlWebpackPlugins,
         new CopyPlugin({
-            patterns: [{ from: 'robots.txt' }],
+            patterns: [
+                { from: 'robots.txt' },
+                { from: 'images/**/*' }
+            ],
         }),
     ],
     output: {

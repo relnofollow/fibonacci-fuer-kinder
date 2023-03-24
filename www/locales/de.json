@@ -1,0 +1,58 @@
+{
+    "meta": {
+        "lang": "de",
+        "description": "Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.",
+        "title": "Fibonacci für Kinder"
+    },
+    "title": "Fibonacci-Zahlengenerator",
+    "subtitle": "für junge Mathematiker*Innen",
+    "autoplay": "Autoplay",
+    "btn-prev": {
+        "text": "Voriger Schritt",
+        "title": "Ein Schritt zurück"
+    },
+    "btn-next": {
+        "text": "Nächster Schritt",
+        "title": "Ein Schritt weiter"
+    },
+    "btn-reset": {
+        "title": "Zum Anfang"
+    },
+    
+    "btn-backwards": {
+        "title": "Auto zurück"
+    },
+    "btn-stop": {
+        "title": "Stop"
+    },
+    "btn-forwards": {
+        "title": "Auto weiter"
+    },
+    "btn-speed-1": {
+        "title": "Normale Geschwindigkeit"
+    },
+    "btn-speed-2": {
+        "title": "2-mal schneller"
+    },
+    "btn-speed-3": {
+        "title": "3-mal schneller"
+    },
+    "btn-speed-10": {
+        "title": "10-mal schneller"
+    },
+    "btn-speed-50": {
+        "title": "50-mal schneller"
+    },
+    "btn-info": {
+        "text": "Was sind die Fibonacci-Zahlen?"
+    },
+    "btn-close": {
+        "text": "Schließen"
+    },
+    "modal-info": {
+        "title": "Was sind die Fibonacci-Zahlen?",
+        "body": "<p>Die Fibonacci-Folge ist die unendliche Folge natürlicher Zahlen, die (ursprünglich) mit zweimal der Zahl 1 beginnt oder (häufig, in moderner Schreibweise) zusätzlich mit einer führenden Zahl 0 versehen ist. Danach ist jede Zahl die Summe der beiden ihr vorangehenden Zahlen. </p> <p>Die Fibonacci-Folge <img src=\"/images/members.svg\" alt=\"f1, f2, f3\" /> durch das rekursive Bildungsgesetz <span class=\"no-wrap\"> <img src=\"/images/formula.svg\" alt=\"f(n) = f(n-1) + f(n-2)\" /> für <img src=\"/images/n-definition.svg\" alt=\"n >= 3\" /></span> mit den Anfangswerten <img src=\"/images/first-members.svg\" alt=\"f1 = f2 = 1\" /> definiert. </p><p>Das bedeutet in Worten:</p> <ul><li>Für die beiden ersten Zahlen wird der Wert 1 vorgegeben.</li><li>Jede weitere Zahl ist die Summe ihrer beiden Vorgänger in der Folge.</li></ul><a href=\"https://de.wikipedia.org/wiki/Fibonacci-Folge\">Mehr auf Wikipedia lesen</a>"
+    },
+    "step-num": "<span class=\"step-num-value\">1</span>. Schritt",
+    "themezy-link": "Kostenlose Website-Vorlage von Themezy"
+}

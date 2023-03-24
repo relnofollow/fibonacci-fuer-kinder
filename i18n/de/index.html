@@ -2,23 +2,21 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. 
-            Spielerisch die Fibonacci-Zahlen kennen lernen." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.">
     <title>Fibonacci für Kinder</title>
-    <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Lora&display=swap" rel="stylesheet"
-        type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Lora&display=swap" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <button type="button" class="btn-dashed btn-lang fib-lang"><img class="img-lang"
-            src="<%= require('./images/lang/en.svg') %>" /></button>
+    <button type="button" class="btn-dashed btn-lang fib-lang"><img class="img-lang" src="/images/lang/de.svg"></button>
     <div class="lang-menu fib-lang-menu fib-display-none">
-        <a class="lang-item" href="/de"><img class="img-lang" src="<%= require('./images/lang/de.svg') %>" /></a>
-        <a class="lang-item" href="/ru"><img class="img-lang" src="<%= require('./images/lang/ru.svg') %>" /></a>
-        <a class="lang-item" href="/ua"><img class="img-lang" src="<%= require('./images/lang/ua.svg') %>" /></a>
-        <a class="lang-item" href="/it"><img class="img-lang" src="<%= require('./images/lang/it.svg') %>" /></a>
+        <a class="lang-item" href="/de"><img class="img-lang" src="/images/lang/de.svg"></a>
+        <a class="lang-item" href="/"><img class="img-lang" src="/images/lang/en.svg"></a>
+        <a class="lang-item" href="/it"><img class="img-lang" src="/images/lang/it.svg"></a>
+        <a class="lang-item" href="/ru"><img class="img-lang" src="/images/lang/ru.svg"></a>
+        <a class="lang-item" href="/ua"><img class="img-lang" src="/images/lang/ua.svg"></a>
     </div>
 
     <main>
@@ -26,9 +24,7 @@
         <p class="subtitle">für junge Mathematiker*Innen</p>
         <div class="fib-canvas">
             <div class="panel-step">
-                <div class="step-num">
-                    <span class="step-num-value">1.</span> Schritt
-                </div>
+                <div class="step-num"><span class="step-num-value">1</span>. Schritt</div>
             </div>
             <div class="panel-numbers">
                 <div class="fib-num fib-num-1">
@@ -39,11 +35,11 @@
                     <div class="fib-num-value">1</div>
                 </div>
                 <div class="fib-num-3-grid-cell">
-                    <img class="fib-arrow-left" src="<%= require('./images/arrow.svg') %>" alt="arrow left" />
+                    <img class="fib-arrow-left" src="/images/arrow.svg" alt="arrow left">
                     <div class="fib-num fib-num-3">
                         <div class="fib-num-value">1</div>
                     </div>
-                    <img class="fib-arrow-right" src="<%= require('./images/arrow.svg') %>" alt="arrow right" />
+                    <img class="fib-arrow-right" src="/images/arrow.svg" alt="arrow right">
                 </div>
             </div>
 
@@ -73,12 +69,11 @@
                         <i class="fa-solid fa-stop"></i>
                     </button>
                     <button type="button" class="btn-dashed btn-auto btn-radio fib-forwards" title="Auto weiter">
-                        <i class="fa-solid fa-angle-right"></i>
+                        <i class=" fa-solid fa-angle-right"></i>
                     </button>
                 </div>
                 <div class="panel-speed">
-                    <button type="button" class="btn-outline fib-speed btn-outline-active"
-                        title="Normale Geschwindigkeit">
+                    <button type="button" class="btn-outline fib-speed btn-outline-active" title="Normale Geschwindigkeit">
                         x 1
                     </button>
                     <button type="button" class="btn-outline fib-speed" title="2-mal schneller">
@@ -98,59 +93,18 @@
             <div class="panel-info">
                 <button class="btn-info btn-dashed fib-info">
                     <i class="fa-solid fa-book"></i>
-                    Was sind die Fibonacci-Zahlen?
+                    <span>Was sind die Fibonacci-Zahlen?</span>
                 </button>
             </div>
             <div class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="btn-close fib-close"><i class="fa-solid fa-circle-xmark"></i></span>
-                        <h2 class="modal-header-title">
-                            Was sind die Fibonacci-Zahlen?
-                        </h2>
+                        <h2 class="modal-header-title">Was sind die Fibonacci-Zahlen?</h2>
                     </div>
-                    <div class="modal-body">
-                        <p>
-                            Die Fibonacci-Folge ist die unendliche Folge
-                            natürlicher Zahlen, die (ursprünglich) mit
-                            zweimal der Zahl 1 beginnt oder (häufig, in
-                            moderner Schreibweise) zusätzlich mit einer
-                            führenden Zahl 0 versehen ist. Danach ist jede
-                            Zahl die Summe der beiden ihr vorangehenden
-                            Zahlen.
-                        </p>
-                        <p>
-                            Die Fibonacci-Folge
-                            <img src="<%= require('./images/members.svg') %>" alt="f1, f2, f3" />
-                            ist durch das rekursive Bildungsgesetz
-                            <span class="no-wrap">
-                                <img src="<%= require('./images/formula.svg') %>" alt="f(n) = f(n-1) + f(n-2)" />
-                                für
-                                <img src="<%= require('./images/n-definition.svg') %>" alt="n >= 3" /></span>
-                            mit den Anfangswerten
-                            <img src="<%= require('./images/first-members.svg') %>" alt="f1 = f2 = 1" />
-                            definiert.
-                        </p>
-                        <p>Das bedeutet in Worten:</p>
-
-                        <ul>
-                            <li>
-                                Für die beiden ersten Zahlen wird der Wert 1
-                                vorgegeben.
-                            </li>
-                            <li>
-                                Jede weitere Zahl ist die Summe ihrer beiden
-                                Vorgänger in der Folge.
-                            </li>
-                        </ul>
-
-                        <a href="https://de.wikipedia.org/wiki/Fibonacci-Folge">Mehr auf Wikipedia lesen</a>
-                    </div>
-
+                    <div class="modal-body"><p>Die Fibonacci-Folge ist die unendliche Folge natürlicher Zahlen, die (ursprünglich) mit zweimal der Zahl 1 beginnt oder (häufig, in moderner Schreibweise) zusätzlich mit einer führenden Zahl 0 versehen ist. Danach ist jede Zahl die Summe der beiden ihr vorangehenden Zahlen. </p> <p>Die Fibonacci-Folge <img src="/images/members.svg" alt="f1, f2, f3" /> durch das rekursive Bildungsgesetz <span class="no-wrap"> <img src="/images/formula.svg" alt="f(n) = f(n-1) + f(n-2)" /> für <img src="/images/n-definition.svg" alt="n >= 3" /></span> mit den Anfangswerten <img src="/images/first-members.svg" alt="f1 = f2 = 1" /> definiert. </p><p>Das bedeutet in Worten:</p> <ul><li>Für die beiden ersten Zahlen wird der Wert 1 vorgegeben.</li><li>Jede weitere Zahl ist die Summe ihrer beiden Vorgänger in der Folge.</li></ul><a href="https://de.wikipedia.org/wiki/Fibonacci-Folge">Mehr auf Wikipedia lesen</a></div>
                     <div class="modal-footer">
-                        <button class="btn-dashed fib-close" type="button">
-                            Schließen
-                        </button>
+                        <button class="btn-dashed fib-close" type="button">Schließen</button>
                     </div>
                 </div>
             </div>
