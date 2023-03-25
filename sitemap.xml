@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.fibonacci-for-kids.com</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.fibonacci-for-kids.com/de/"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="ru"
+               href="https://www.fibonacci-for-kids.com/ru/"/>
+  </url>
+  <url>
+    <loc>https://www.fibonacci-for-kids.com/de/</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.fibonacci-for-kids.com"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="ru"
+               href="https://www.fibonacci-for-kids.com/ru/"/>
+  </url>
+  <url>
+    <loc>https://www.fibonacci-for-kids.com/ru/</loc>
+    <xhtml:link
+               rel="alternate"
+               hreflang="de"
+               href="https://www.fibonacci-for-kids.com/de/"/>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://www.fibonacci-for-kids.com"/>
+  </url>
+</urlset>

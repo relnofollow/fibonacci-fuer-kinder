@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Генератор чисел Фибоначчи для детей. Нажимайте на кнопки, чтобы увидеть следующие числа. Учитесь играя!">
+    <title>Фибоначчи для детей</title>
+    <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Lora&display=swap" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <button type="button" class="btn-dashed btn-lang fib-lang"><img class="img-lang" src="/images/lang/ru.svg"></button>
+    <div class="lang-menu fib-lang-menu fib-display-none">
+        <a class="lang-item" href="/de"><img class="img-lang" src="/images/lang/de.svg"></a>
+        <a class="lang-item" href="/"><img class="img-lang" src="/images/lang/en.svg"></a>
+        <a class="lang-item" href="/ru"><img class="img-lang" src="/images/lang/ru.svg"></a>
+    </div>
+
+    <main>
+        <h1 class="main-title text-white">Генератор чисел Фибоначчи </h1>
+        <p class="subtitle">для юных математиков</p>
+        <div class="fib-canvas">
+            <div class="panel-step">
+                <div class="step-num">Шаг <span class="step-num-value">1</span></div>
+            </div>
+            <div class="panel-numbers">
+                <div class="fib-num fib-num-1">
+                    <div class="fib-num-value">0</div>
+                </div>
+                <div class="fib-sign">+</div>
+                <div class="fib-num fib-num-2">
+                    <div class="fib-num-value">1</div>
+                </div>
+                <div class="fib-num-3-grid-cell">
+                    <img class="fib-arrow-left" src="/images/arrow.svg" alt="arrow left">
+                    <div class="fib-num fib-num-3">
+                        <div class="fib-num-value">1</div>
+                    </div>
+                    <img class="fib-arrow-right" src="/images/arrow.svg" alt="arrow right">
+                </div>
+            </div>
+
+            <div class="panel-actions">
+                <button type="button" class="btn-dashed btn-reset fib-reset" title="Перейти в начало">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+                <div class="panel-step-btns">
+                    <button type="button" class="btn-dashed btn-step btn-radio fib-prev" title="Один шаг назад">
+                        <i class="fa-solid fa-angle-left"></i>
+                        <span>Предыдущий шаг</span>
+                    </button>
+                    <button type="button" class="btn-dashed btn-step btn-radio fib-next" title="Один шаг вперед">
+                        <span>Следующий шаг</span>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-auto">
+                <div class="panel-auto-title">Автопроигрывание</div>
+
+                <div class="panel-auto-actions">
+                    <button type="button" class="btn-dashed btn-auto btn-radio fib-backwards" title="Назад">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button type="button" class="btn-dashed btn-auto btn-auto-stop btn-radio fib-stop" title="Стоп">
+                        <i class="fa-solid fa-stop"></i>
+                    </button>
+                    <button type="button" class="btn-dashed btn-auto btn-radio fib-forwards" title="Вперед">
+                        <i class=" fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+                <div class="panel-speed">
+                    <button type="button" class="btn-outline fib-speed btn-outline-active" title="Нормальная скоросить">
+                        x 1
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" title="В 2 раза быстрее">
+                        x 2
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" title="В 3 раза быстрее">
+                        x 3
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" title="В 10 раз быстрее">
+                        x 10
+                    </button>
+                    <button type="button" class="btn-outline fib-speed" title="В 50 раз быстрее">
+                        x 50
+                    </button>
+                </div>
+            </div>
+            <div class="panel-info">
+                <button class="btn-info btn-dashed fib-info">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Что такое числа Фибоначчи?</span>
+                </button>
+            </div>
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="btn-close fib-close"><i class="fa-solid fa-circle-xmark"></i></span>
+                        <h2 class="modal-header-title">Что такое числа Фибоначии?</h2>
+                    </div>
+                    <div class="modal-body"><p>Числа Фибоначчи — это элементы числовой последовательности, в которой каждое число является суммой двух предыдущих чисел. Последовательность обычно начинается с 0 и 1, хотя в некоторых книгах это может быть 1 и 1 или иногда (как было у самого Фибоначчи) с 1 и 2.</p> <p>Последовательность Фибоначчи <img src="/images/members.svg" alt="f1, f2, f3" /> определяется рекуррентным соотношением <span class="no-wrap"> <img src="/images/formula.svg" alt="f(n) = f(n-1) + f(n-2)" /> для <img src="/images/n-definition.svg" alt="n >= 3" /></span>, где начальные члены последовательности: <img src="/images/first-members.svg" alt="f1 = f2 = 1" />.</p><p>Это означает:</p> <ul><li>Первые два члена последовательности равны 1</li><li>Каждое следующее число равно сумме двух предыдущих членов последовательности</li></ul><a href="https://ru.wikipedia.org/wiki/%D0%A7%D0%B8%D1%81%D0%BB%D0%B0_%D0%A4%D0%B8%D0%B1%D0%BE%D0%BD%D0%B0%D1%87%D1%87%D0%B8">Узнать больше на Википедии</a></div>
+                    <div class="modal-footer">
+                        <button class="btn-dashed fib-close" type="button">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <a rel="nofollow" href="https://github.com/relnofollow/fibonacci-fuer-kinder" class="link-github" title="Projektquelle auf GitHub">
+            <i class="fa-brands fa-github"></i>
+        </a>
+        <div>
+            <a rel="nofollow" href="http://www.themezy.com/">Бесплатный шаблон сайта от Themezy</a>
+        </div>
+    </footer>
+</body>
+
+</html>

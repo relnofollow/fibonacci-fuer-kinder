@@ -8,7 +8,7 @@
         "build": "webpack --config webpack.prod.js",
         "prod": "http-server ./dist",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "i18n": "static-i18n -l en -i en -i de www"
+        "i18n": "static-i18n -l en -i en -i de -i ru www"
     },
     "author": "",
     "license": "ISC",

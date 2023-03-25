@@ -123,13 +123,6 @@ export class FibApp {
         this.#btnLang.addEventListener('click', (e) => {
             e.stopPropagation();
             this.#toggleLangMenu();
-
-            const isMenuOpen = !this.#menuLang.classList.contains('fib-display-none');
-            if (isMenuOpen) {
-                document.addEventListener('click', this.#toggleLangMenu);
-            } else {
-                document.removeEventListener('click', this.#toggleLangMenu);
-            }
         });
 
         this.#menuLang.addEventListener('click', (e) => {
@@ -139,6 +132,13 @@ export class FibApp {
 
     #toggleLangMenu = () => {
         this.#menuLang.classList.toggle('fib-display-none');
+
+        const isMenuOpen = !this.#menuLang.classList.contains('fib-display-none');
+        if (isMenuOpen) {
+            document.addEventListener('click', this.#toggleLangMenu);
+        } else {
+            document.removeEventListener('click', this.#toggleLangMenu);
+        }
     }
 
     #subscribeToObservables() {

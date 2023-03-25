@@ -7,7 +7,7 @@ const i18nHtmlWebpackPlugins = [new HtmlWebpackPlugin({
     template: 'i18n/index.html',
 })];
 
-const LOCALES = ['de'];
+const LOCALES = ['de', 'ru'];
 
 for (let locale of LOCALES) {
     i18nHtmlWebpackPlugins.push(new HtmlWebpackPlugin({
@@ -26,6 +26,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: 'robots.txt' },
+                { from: 'sitemap.xml' },
                 { from: 'images/**/*' }
             ],
         }),
