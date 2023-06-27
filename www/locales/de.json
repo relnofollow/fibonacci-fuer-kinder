@@ -1,8 +1,9 @@
 {
     "meta": {
         "lang": "de",
-        "description": "Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.",
-        "title": "Fibonacci für Kinder"
+        "description": "Ein lustiger Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.",
+        "title": "Ein lustiger Fibonacci-Zahlengenerator für Kinder",
+        "image": "/images/og-preview-de.png"
     },
     "title": "Fibonacci-Zahlengenerator",
     "subtitle": "für junge Mathematiker*Innen",
@@ -18,7 +19,7 @@
     "btn-reset": {
         "title": "Zum Anfang"
     },
-    
+
     "btn-backwards": {
         "title": "Auto zurück"
     },

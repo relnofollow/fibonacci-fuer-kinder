@@ -1,8 +1,9 @@
 {
     "meta": {
         "lang": "en",
-        "description": "Fibonacci number generator for children. Click on the buttons to see the next number. Playfully learn about the Fibonacci numbers.",
-        "title": "Fibonacci for kids"
+        "description": "Fun Fibonacci number generator for children. Click on the buttons to see the next number. Playfully learn about the Fibonacci numbers.",
+        "title": "Fun Fibonacci number generator for kids",
+        "image": "/images/og-preview-en.png"
     },
     "title": "Fibonacci Generator",
     "subtitle": "for young mathematicians",

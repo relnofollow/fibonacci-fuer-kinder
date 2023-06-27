@@ -1,121 +1,139 @@
 <!DOCTYPE html>
 <html lang="de">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-86XM2LSQW9"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.">
-    <title>Fibonacci für Kinder</title>
-    <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Lora&display=swap" rel="stylesheet" type="text/css">
-</head>
+            gtag('config', 'G-86XM2LSQW9');
+        </script>
 
-<body>
-    <button type="button" class="btn-dashed btn-lang fib-lang"><img class="img-lang" src="/images/lang/de.svg"></button>
-    <div class="lang-menu fib-lang-menu fib-display-none">
-        <a class="lang-item" href="/de"><img class="img-lang" src="/images/lang/de.svg"></a>
-        <a class="lang-item" href="/"><img class="img-lang" src="/images/lang/en.svg"></a>
-        <a class="lang-item" href="/ru"><img class="img-lang" src="/images/lang/ru.svg"></a>
-    </div>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Ein lustiger Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.">
+        <title>Ein lustiger Fibonacci-Zahlengenerator für Kinder</title>
 
-    <main>
-        <h1 class="main-title text-white">Fibonacci-Zahlengenerator</h1>
-        <p class="subtitle">für junge Mathematiker*Innen</p>
-        <div class="fib-canvas">
-            <div class="panel-step">
-                <div class="step-num"><span class="step-num-value">1</span>. Schritt</div>
-            </div>
-            <div class="panel-numbers">
-                <div class="fib-num fib-num-1">
-                    <div class="fib-num-value">0</div>
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Ein lustiger Fibonacci-Zahlengenerator für Kinder">
+        <meta property="og:description" content="Ein lustiger Fibonacci-Zahlengenerator für Kinder. Drucken Sie die Knöpfe, um die nächste Zahl zu sehen. Spielerisch die Fibonacci-Zahlen kennen lernen.">
+        <meta property="og:image" content="/images/og-preview-de.png">
+
+        <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Lora&display=swap" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <button type="button" class="btn-dashed btn-lang fib-lang">
+            <img class="img-lang" src="/images/lang/de.svg">
+        </button>
+        <div class="lang-menu fib-lang-menu fib-display-none">
+            <a class="lang-item" href="/de"><img class="img-lang" src="/images/lang/de.svg"></a>
+            <a class="lang-item" href="/"><img class="img-lang" src="/images/lang/en.svg"></a>
+            <a class="lang-item" href="/ru"><img class="img-lang" src="/images/lang/ru.svg"></a>
+        </div>
+
+        <main>
+            <h1 class="main-title text-white">Fibonacci-Zahlengenerator</h1>
+            <p class="subtitle">für junge Mathematiker*Innen</p>
+            <div class="fib-canvas">
+                <div class="panel-step">
+                    <div class="step-num"><span class="step-num-value">1</span>. Schritt</div>
                 </div>
-                <div class="fib-sign">+</div>
-                <div class="fib-num fib-num-2">
-                    <div class="fib-num-value">1</div>
-                </div>
-                <div class="fib-num-3-grid-cell">
-                    <img class="fib-arrow-left" src="/images/arrow.svg" alt="arrow left">
-                    <div class="fib-num fib-num-3">
+                <div class="panel-numbers">
+                    <div class="fib-num fib-num-1">
+                        <div class="fib-num-value">0</div>
+                    </div>
+                    <div class="fib-sign">+</div>
+                    <div class="fib-num fib-num-2">
                         <div class="fib-num-value">1</div>
                     </div>
-                    <img class="fib-arrow-right" src="/images/arrow.svg" alt="arrow right">
-                </div>
-            </div>
-
-            <div class="panel-actions">
-                <button type="button" class="btn-dashed btn-reset fib-reset" title="Zum Anfang">
-                    <i class="fa-solid fa-rotate-left"></i>
-                </button>
-                <div class="panel-step-btns">
-                    <button type="button" class="btn-dashed btn-step btn-radio fib-prev" title="Ein Schritt zurück">
-                        <i class="fa-solid fa-angle-left"></i>
-                        <span>Voriger Schritt</span>
-                    </button>
-                    <button type="button" class="btn-dashed btn-step btn-radio fib-next" title="Ein Schritt weiter">
-                        <span>Nächster Schritt</span>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="panel-auto">
-                <div class="panel-auto-title">Autoplay</div>
-
-                <div class="panel-auto-actions">
-                    <button type="button" class="btn-dashed btn-auto btn-radio fib-backwards" title="Auto zurück">
-                        <i class="fa-solid fa-angle-left"></i>
-                    </button>
-                    <button type="button" class="btn-dashed btn-auto btn-auto-stop btn-radio fib-stop" title="Stop">
-                        <i class="fa-solid fa-stop"></i>
-                    </button>
-                    <button type="button" class="btn-dashed btn-auto btn-radio fib-forwards" title="Auto weiter">
-                        <i class=" fa-solid fa-angle-right"></i>
-                    </button>
-                </div>
-                <div class="panel-speed">
-                    <button type="button" class="btn-outline fib-speed btn-outline-active" title="Normale Geschwindigkeit">
-                        x 1
-                    </button>
-                    <button type="button" class="btn-outline fib-speed" title="2-mal schneller">
-                        x 2
-                    </button>
-                    <button type="button" class="btn-outline fib-speed" title="3-mal schneller">
-                        x 3
-                    </button>
-                    <button type="button" class="btn-outline fib-speed" title="10-mal schneller">
-                        x 10
-                    </button>
-                    <button type="button" class="btn-outline fib-speed" title="50-mal schneller">
-                        x 50
-                    </button>
-                </div>
-            </div>
-            <div class="panel-info">
-                <button class="btn-info btn-dashed fib-info">
-                    <i class="fa-solid fa-book"></i>
-                    <span>Was sind die Fibonacci-Zahlen?</span>
-                </button>
-            </div>
-            <div class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <span class="btn-close fib-close"><i class="fa-solid fa-circle-xmark"></i></span>
-                        <h2 class="modal-header-title">Was sind die Fibonacci-Zahlen?</h2>
-                    </div>
-                    <div class="modal-body"><p>Die Fibonacci-Folge ist die unendliche Folge natürlicher Zahlen, die (ursprünglich) mit zweimal der Zahl 1 beginnt oder (häufig, in moderner Schreibweise) zusätzlich mit einer führenden Zahl 0 versehen ist. Danach ist jede Zahl die Summe der beiden ihr vorangehenden Zahlen. </p> <p>Die Fibonacci-Folge <img src="/images/members.svg" alt="f1, f2, f3" /> durch das rekursive Bildungsgesetz <span class="no-wrap"> <img src="/images/formula.svg" alt="f(n) = f(n-1) + f(n-2)" /> für <img src="/images/n-definition.svg" alt="n >= 3" /></span> mit den Anfangswerten <img src="/images/first-members.svg" alt="f1 = f2 = 1" /> definiert. </p><p>Das bedeutet in Worten:</p> <ul><li>Für die beiden ersten Zahlen wird der Wert 1 vorgegeben.</li><li>Jede weitere Zahl ist die Summe ihrer beiden Vorgänger in der Folge.</li></ul><a href="https://de.wikipedia.org/wiki/Fibonacci-Folge">Mehr auf Wikipedia lesen</a></div>
-                    <div class="modal-footer">
-                        <button class="btn-dashed fib-close" type="button">Schließen</button>
+                    <div class="fib-num-3-grid-cell">
+                        <img class="fib-arrow-left" src="/images/arrow.svg" alt="arrow left">
+                        <div class="fib-num fib-num-3">
+                            <div class="fib-num-value">1</div>
+                        </div>
+                        <img class="fib-arrow-right" src="/images/arrow.svg" alt="arrow right">
                     </div>
                 </div>
-            </div>
-        </div>
-    </main>
-    <footer>
-        <a rel="nofollow" href="https://github.com/relnofollow/fibonacci-fuer-kinder" class="link-github" title="Projektquelle auf GitHub">
-            <i class="fa-brands fa-github"></i>
-        </a>
-        <div>
-            <a rel="nofollow" href="http://www.themezy.com/">Kostenlose Website-Vorlage von Themezy</a>
-        </div>
-    </footer>
-</body>
 
+                <div class="panel-actions">
+                    <button type="button" class="btn-dashed btn-reset fib-reset" title="Zum Anfang">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </button>
+                    <div class="panel-step-btns">
+                        <button type="button" class="btn-dashed btn-step btn-radio fib-prev" title="Ein Schritt zurück">
+                            <i class="fa-solid fa-angle-left"></i>
+                            <span>Voriger Schritt</span>
+                        </button>
+                        <button type="button" class="btn-dashed btn-step btn-radio fib-next" title="Ein Schritt weiter">
+                            <span>Nächster Schritt</span>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-auto">
+                    <div class="panel-auto-title">Autoplay</div>
+
+                    <div class="panel-auto-actions">
+                        <button type="button" class="btn-dashed btn-auto btn-radio fib-backwards" title="Auto zurück">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <button type="button" class="btn-dashed btn-auto btn-auto-stop btn-radio fib-stop" title="Stop">
+                            <i class="fa-solid fa-stop"></i>
+                        </button>
+                        <button type="button" class="btn-dashed btn-auto btn-radio fib-forwards" title="Auto weiter">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
+                    <div class="panel-speed">
+                        <button type="button" class="btn-outline fib-speed btn-outline-active" title="Normale Geschwindigkeit">
+                            x 1
+                        </button>
+                        <button type="button" class="btn-outline fib-speed" title="2-mal schneller">
+                            x 2
+                        </button>
+                        <button type="button" class="btn-outline fib-speed" title="3-mal schneller">
+                            x 3
+                        </button>
+                        <button type="button" class="btn-outline fib-speed" title="10-mal schneller">
+                            x 10
+                        </button>
+                        <button type="button" class="btn-outline fib-speed" title="50-mal schneller">
+                            x 50
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-info">
+                    <button class="btn-info btn-dashed fib-info">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Was sind die Fibonacci-Zahlen?</span>
+                    </button>
+                </div>
+                <div class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="btn-close fib-close"><i class="fa-solid fa-circle-xmark"></i></span>
+                            <h2 class="modal-header-title">Was sind die Fibonacci-Zahlen?</h2>
+                        </div>
+                        <div class="modal-body"><p>Die Fibonacci-Folge ist die unendliche Folge natürlicher Zahlen, die (ursprünglich) mit zweimal der Zahl 1 beginnt oder (häufig, in moderner Schreibweise) zusätzlich mit einer führenden Zahl 0 versehen ist. Danach ist jede Zahl die Summe der beiden ihr vorangehenden Zahlen. </p> <p>Die Fibonacci-Folge <img src="/images/members.svg" alt="f1, f2, f3" /> durch das rekursive Bildungsgesetz <span class="no-wrap"> <img src="/images/formula.svg" alt="f(n) = f(n-1) + f(n-2)" /> für <img src="/images/n-definition.svg" alt="n >= 3" /></span> mit den Anfangswerten <img src="/images/first-members.svg" alt="f1 = f2 = 1" /> definiert. </p><p>Das bedeutet in Worten:</p> <ul><li>Für die beiden ersten Zahlen wird der Wert 1 vorgegeben.</li><li>Jede weitere Zahl ist die Summe ihrer beiden Vorgänger in der Folge.</li></ul><a href="https://de.wikipedia.org/wiki/Fibonacci-Folge">Mehr auf Wikipedia lesen</a></div>
+                        <div class="modal-footer">
+                            <button class="btn-dashed fib-close" type="button">Schließen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <a rel="nofollow" href="https://github.com/relnofollow/fibonacci-fuer-kinder" class="link-github" title="Projektquelle auf GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <div>
+                <a rel="nofollow" href="http://www.themezy.com/">Kostenlose Website-Vorlage von Themezy</a>
+            </div>
+        </footer>
+    </body>
 </html>

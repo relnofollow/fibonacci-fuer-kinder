@@ -11,6 +11,13 @@
                rel="alternate"
                hreflang="ru"
                href="https://www.fibonacci-for-kids.com/ru/"/>
+    <PageMap>
+      <DataObject type="thumbnail">
+        <Attribute name="src" value="https://www.fibonacci-for-kids.com/images/thumbnail-en.png"/>
+        <Attribute name="width" value="350"/>
+        <Attribute name="height" value="350"/>
+      </DataObject>
+    </PageMap>
   </url>
   <url>
     <loc>https://www.fibonacci-for-kids.com/de/</loc>
@@ -22,6 +29,13 @@
                rel="alternate"
                hreflang="ru"
                href="https://www.fibonacci-for-kids.com/ru/"/>
+    <PageMap>
+      <DataObject type="thumbnail">
+        <Attribute name="src" value="https://www.fibonacci-for-kids.com/images/thumbnail-de.png"/>
+        <Attribute name="width" value="350"/>
+        <Attribute name="height" value="350"/>
+      </DataObject>
+    </PageMap>
   </url>
   <url>
     <loc>https://www.fibonacci-for-kids.com/ru/</loc>
@@ -33,5 +47,12 @@
                rel="alternate"
                hreflang="en"
                href="https://www.fibonacci-for-kids.com"/>
+    <PageMap>
+      <DataObject type="thumbnail">
+        <Attribute name="src" value="https://www.fibonacci-for-kids.com/images/thumbnail-ru.png"/>
+        <Attribute name="width" value="350"/>
+        <Attribute name="height" value="350"/>
+      </DataObject>
+    </PageMap>
   </url>
 </urlset>
