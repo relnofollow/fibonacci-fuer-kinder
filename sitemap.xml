@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:content="http://www.google.com/schemas/sitemap-content/1.0">
   <url>
     <loc>https://www.fibonacci-for-kids.com</loc>
     <xhtml:link
@@ -11,7 +12,7 @@
                rel="alternate"
                hreflang="ru"
                href="https://www.fibonacci-for-kids.com/ru/"/>
-    <PageMap>
+    <PageMap xmlns="http://www.google.com/schemas/sitemap-pagemap/1.0">
       <DataObject type="thumbnail">
         <Attribute name="src" value="https://www.fibonacci-for-kids.com/images/thumbnail-en.png"/>
         <Attribute name="width" value="350"/>
@@ -29,7 +30,7 @@
                rel="alternate"
                hreflang="ru"
                href="https://www.fibonacci-for-kids.com/ru/"/>
-    <PageMap>
+    <PageMap xmlns="http://www.google.com/schemas/sitemap-pagemap/1.0">
       <DataObject type="thumbnail">
         <Attribute name="src" value="https://www.fibonacci-for-kids.com/images/thumbnail-de.png"/>
         <Attribute name="width" value="350"/>
@@ -47,7 +48,7 @@
                rel="alternate"
                hreflang="en"
                href="https://www.fibonacci-for-kids.com"/>
-    <PageMap>
+    <PageMap xmlns="http://www.google.com/schemas/sitemap-pagemap/1.0">
       <DataObject type="thumbnail">
         <Attribute name="src" value="https://www.fibonacci-for-kids.com/images/thumbnail-ru.png"/>
         <Attribute name="width" value="350"/>
