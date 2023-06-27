@@ -3,7 +3,7 @@
         "lang": "en",
         "description": "Fun Fibonacci number generator for children. Click on the buttons to see the next number. Playfully learn about the Fibonacci numbers.",
         "title": "Fun Fibonacci number generator for kids",
-        "image": "/images/og-preview-en.png"
+        "image": "https://www.fibonacci-for-kids.com/images/og-preview-en.png"
     },
     "title": "Fibonacci Generator",
     "subtitle": "for young mathematicians",

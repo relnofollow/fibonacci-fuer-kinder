@@ -3,7 +3,7 @@
         "lang": "ru",
         "description": "Веселый генератор чисел Фибоначчи для детей. Нажимайте на кнопки, чтобы увидеть следующие числа. Учитесь играя!",
         "title": "Веселый генератор чисел Фибоначчи для детей",
-        "image": "/images/og-preview-ru.png"
+        "image": "https://www.fibonacci-for-kids.com/images/og-preview-ru.png"
     },
     "title": "Генератор чисел Фибоначчи ",
     "subtitle": "для юных математиков",
